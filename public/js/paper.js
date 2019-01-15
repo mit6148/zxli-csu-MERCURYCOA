@@ -34,22 +34,23 @@ function newPaperDOMObject() {
   const newStorySubmit = document.createElement("button");
   newStorySubmit.innerHTML = "Submit Comment";
   newStorySubmit.className = "btn btn-outline-primary";
-  newStorySubmit.addEventListener("click", submitStoryHandler);
+  newStorySubmit.addEventListener("click", () => {
+    window.location = "/uploadform";
+  });
   newStoryButtonDiv.appendChild(newStorySubmit);
 
   return newStoryDiv;
 }
 
-function submitStoryHandler() {
-  const newStoryInput = document.getElementById("story-content-input");
+// function submitStoryHandler() {
+//   const newStoryInput = document.getElementById("story-content-input");
 
-  const data = {
-    content: newStoryInput.value
-  };
-
-  post("/api/story", data);
-  newStoryInput.value = "";
-}
+//   const data = {
+//     content: newStoryInput.value
+//   };
+//   post("/api/uploadFile", data);
+//   newStoryInput.value = "";
+// }
 
 function renderPaperData(user) {
   if (user._id !== undefined)
@@ -98,8 +99,9 @@ function renderPaperData(user) {
 
   const historySpan = document.createElement("a");
   historySpan.className = "story-creator card-title";
-  historySpan.innerHTML = user.name;
-  historySpan.setAttribute("href", "/u/profile?" + user._id);
+  historySpan.innerHTML = "version-1";
+  historySpan.setAttribute("href", "/pdf/myprofile.pdf");
+  // historySpan.setAttribute("href", "/u/profile?" + user._id);
   historyCard.appendChild(historySpan);
 
   const latestPost = document.createElement("p");
