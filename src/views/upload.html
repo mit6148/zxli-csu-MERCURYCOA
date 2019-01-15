@@ -20,14 +20,10 @@
       </div>
     </nav>
     <div class="container text-center" id="profile-container">
-      <form
-        id="editfile"
-        method="POST"
-        action="/api/uploadFile"
-        enctype="multipart/form-data"
-      >
-        <input name="avatar" id="upfile" type="file" />
-        <input type="submit" value="Submit" />
+
+      <form action="/api/uploadFile" enctype="multipart/form-data" method="POST">
+        <input type="file" name="photo" />
+        <input type="submit" value="Upload Photo"/>
       </form>
     </div>
   </body>

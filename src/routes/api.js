@@ -9,12 +9,13 @@ const Comment = require("../models/comment");
 const User = require("../models/user");
 const Paper = require("../models/paper");
 const router = express.Router();
+const path = require('path');
 
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
     console.log("file");
     // console.log(file.originalname);
-    cb(null, path.resolve(__dirname, "public"));
+    cb(null, path.resolve(__dirname, "../../public"));
   },
   filename: function(req, file, cb) {
     cb(null, file.originalname);
@@ -114,11 +115,7 @@ router.post("/comment", connect.ensureLoggedIn(), function(req, res) {
 
 router.post(
   "/uploadFile",
-  () => {
-    console.log("middle");
-    upload.single("file");
-    console.log("done");
-  },
+    upload.single("photo"),
   function(req, res, next) {
     console.log("no problem");
     // if (req.file == undefined) {
