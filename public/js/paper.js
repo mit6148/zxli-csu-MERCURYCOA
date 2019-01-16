@@ -37,7 +37,21 @@ function newPaperDOMObject() {
   newStorySubmit.addEventListener("click", () => {
     window.location = "/uploadform";
   });
+
   newStoryButtonDiv.appendChild(newStorySubmit);
+
+  const DownloadButton = document.createElement("div");
+  DownloadButton.className = "input-group-append";
+  newStoryDiv.appendChild(DownloadButton);
+
+  const btnSubmit = document.createElement("button");
+  btnSubmit.innerHTML = "Download";
+  btnSubmit.className = "btn btn-outline-primary";
+  btnSubmit.addEventListener("click", () => {
+    window.location = "/download";
+  });
+
+  DownloadButton.appendChild(btnSubmit);
 
   return newStoryDiv;
 }

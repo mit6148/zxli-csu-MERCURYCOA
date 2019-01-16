@@ -2,20 +2,20 @@
 const express = require("express");
 const connect = require("connect-ensure-login");
 const multer = require("multer");
-
+const mongoose = require("mongoose");
 // models
 const Story = require("../models/story");
 const Comment = require("../models/comment");
 const User = require("../models/user");
 const Paper = require("../models/paper");
 const router = express.Router();
-const path = require('path');
+const path = require("path");
 
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
     console.log("file");
     // console.log(file.originalname);
-    cb(null, path.resolve(__dirname, "../../public"));
+    cb(null, path.resolve(__dirname, "../../public/pdf"));
   },
   filename: function(req, file, cb) {
     cb(null, file.originalname);
@@ -88,6 +88,31 @@ router.get("/mypaper", function(req, res) {
   });
 });
 
+router.get("/allpaper", function(req, res) {
+  Paper.find({}, function(err, papers) {
+    res.send(papers);
+  });
+});
+
+router.get("/paper/:_id", (req, res) => {
+  const errors = {};
+
+  Paper.findOne({ id: req.query._id })
+    .then(paper => {
+      if (!paper) {
+        errors = "There is no paper for this user";
+        res.status(404).json(errors);
+      }
+
+      res.json(paper);
+      // res.sendFile("paper.html", { root: "src/views" });
+      console.log(paper);
+    })
+    .catch(err =>
+      res.status(404).json({ paper: "There is no profile for this user" })
+    );
+});
+
 router.post("/comment", connect.ensureLoggedIn(), function(req, res) {
   const newComment = new Comment({
     creator_id: req.user._id,
@@ -113,50 +138,44 @@ router.post("/comment", connect.ensureLoggedIn(), function(req, res) {
 //   }
 // );
 
-router.post(
-  "/uploadFile",
-    upload.single("photo"),
-  function(req, res, next) {
-    console.log("no problem");
-    // if (req.file == undefined) {
-    //   return res
-    //     .status(422)
-    //     .send({ error: "You must select a file to upload." });
-    // }
-    // //console.log(req.body.author)
-    // const product = new FileDetail({
-    //   _id: new mongoose.Types.ObjectId(),
-    //   // uploader: req.body.uploader,
-    //   // uploader: "Ajay",
-    //   filePath: req.file.path,
-    //   fileName: req.file.originalname,
-    //   author: req.body.author,
-    //   abstract: req.body.abstract,
-    //   subject: req.body.subject
-    // });
-    // product
-    //   .save()
-    //   .then(result => {
-    //     FileDetail.find({}).exec(function(err, files) {
-    //       if (files) {
-    //         res.status(201).json({
-    //           message: "File uploaded successfully",
-    //           allFilesDetail: files
-    //         });
-    //       } else {
-    //         res.status(204).json({
-    //           message: "No file detail exist",
-    //           allFilesDetail: files
-    //         });
-    //       }
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //     res.status(500).json({
-    //       error: err
-    //     });
-    //   });
+router.post("/uploadFile", upload.single("photo"), function(req, res, next) {
+  console.log("no problem");
+  if (req.file == undefined) {
+    return res.status(422).send({ error: "You must select a file to upload." });
   }
-);
+  //console.log(req.body.author)
+  const product = new Paper({
+    _id: new mongoose.Types.ObjectId(),
+    // uploader: req.body.uploader,
+    // uploader: "Ajay",
+    filePath: req.file.path,
+    fileName: req.file.originalname,
+    author: req.body.author,
+    abstract: req.body.abstract,
+    subject: req.body.subject
+  });
+  product
+    .save()
+    .then(result => {
+      Paper.find({}).exec(function(err, files) {
+        if (files) {
+          res.status(201).json({
+            message: "File uploaded successfully",
+            allFilesDetail: files
+          });
+        } else {
+          res.status(204).json({
+            message: "No file detail exist",
+            allFilesDetail: files
+          });
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
 module.exports = router;
