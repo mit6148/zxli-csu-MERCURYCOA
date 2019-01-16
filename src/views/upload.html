@@ -20,36 +20,10 @@
       </div>
     </nav>
     <div class="container text-center" id="profile-container">
-      <form
-        action="/api/uploadFile"
-        enctype="multipart/form-data"
-        method="POST"
-      >
-        <div>
-          <label for="title">Title:</label>
-          <input type="text" id="title" name="title" />
-        </div>
-        <div>
-          <label for="mail">Author:</label>
-          <input type="text" id="author" name="author" />
-        </div>
-        <div>
-          <label for="subject">Subject:</label>
-          <select name="subject">
-            <option value="physics">Physics</option>
-            <option value="chemistry">Chemistry</option>
-            <option value="math">Mathematics</option>
-            <option value="econ">Ecomonics</option>
-          </select>
-        </div>
-        <div>
-          <label for="abstract">Abstract:</label>
-          <textarea id="abstract" name="abstract"></textarea>
-        </div>
-        <div>
-          <input type="file" name="photo" />
-          <input type="submit" value="Upload Photo" />
-        </div>
+
+      <form action="/api/uploadFile" enctype="multipart/form-data" method="POST">
+        <input type="file" name="photo" />
+        <input type="submit" value="Upload Photo"/>
       </form>
     </div>
   </body>

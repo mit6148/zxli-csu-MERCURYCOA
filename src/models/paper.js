@@ -8,10 +8,7 @@ const PaperModelSchema = new mongoose.Schema({
   abstract: String,
   subject: String, // select list
   // method: String,
-  views: {
-    type: Number,
-    default: 0
-  },
+  // views: Number,
   downlads: Number,
   papernumber: String
 });

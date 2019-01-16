@@ -44,14 +44,6 @@ function renderPaper(papers) {
       storiesDiv.prepend(paperDOMObject(currentStory));
     }
   });
-
-  const poplarDiv = document.getElementById("physics-paper");
-  get("/api/catepaper/", { subject: "physics" }, function(papers) {
-    for (let i = 0; i < papers.length; i++) {
-      const currentStory = papers[i];
-      poplarDiv.prepend(paperDOMObject(currentStory));
-    }
-  });
 }
 
 main();
