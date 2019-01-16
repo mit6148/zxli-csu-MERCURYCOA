@@ -26,10 +26,8 @@ router.get("/uploadform", function(req, res) {
   res.sendFile("upload.html", { root: "src/views" });
 });
 router.get("/download", function(req, res) {
-  // res.sendFile("upload.html", { root: "src/views" });
-  res.download(path.join(__dirname, "myprofile.pdf"), function(err) {
-    console.log(err);
-  });
+  var file = __dirname + "/myprofile.pdf";
+  res.download(file);
 });
 
 module.exports = router;

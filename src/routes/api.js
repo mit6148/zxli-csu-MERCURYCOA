@@ -93,6 +93,11 @@ router.get("/allpaper", function(req, res) {
     res.send(papers);
   });
 });
+router.get("/catepaper/", function(req, res) {
+  Paper.find({ subject: req.query.subject }, function(err, papers) {
+    res.send(papers);
+  });
+});
 
 router.get("/paper/:_id", (req, res) => {
   const errors = {};
