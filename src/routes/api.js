@@ -96,7 +96,6 @@ router.get("/allpaper", function(req, res) {
 
 router.get("/paper/:_id", (req, res) => {
   const errors = {};
-
   Paper.findOne({ id: req.query._id })
     .then(paper => {
       if (!paper) {
@@ -104,8 +103,9 @@ router.get("/paper/:_id", (req, res) => {
         res.status(404).json(errors);
       }
 
-      res.json(paper);
-      // res.sendFile("paper.html", { root: "src/views" });
+
+      //res.json(paper);
+      res.sendFile("paper.html", { root: "src/views" });
       console.log(paper);
     })
     .catch(err =>
@@ -140,6 +140,7 @@ router.post("/comment", connect.ensureLoggedIn(), function(req, res) {
 
 router.post("/uploadFile", upload.single("photo"), function(req, res, next) {
   console.log("no problem");
+  console.log('file data',req.file)
   if (req.file == undefined) {
     return res.status(422).send({ error: "You must select a file to upload." });
   }
@@ -157,6 +158,7 @@ router.post("/uploadFile", upload.single("photo"), function(req, res, next) {
   product
     .save()
     .then(result => {
+      console.log('save')
       Paper.find({}).exec(function(err, files) {
         if (files) {
           res.status(201).json({

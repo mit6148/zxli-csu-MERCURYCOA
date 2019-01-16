@@ -1,10 +1,15 @@
 function main() {
+
+
+
+
   const profileId = window.location.search.substring(1);
+
   //   get("/api/user", { id: profileId }, function(profileUser) {
   //     renderUserData(profileUser);
   //   });
 
-  get("/api/user", { id: profileId }, function(profileUser) {
+    get("/api/user", { id: profileId }, function(profileUser) {
     renderPaperData(profileUser);
   });
   // const user = {
@@ -122,6 +127,16 @@ function renderPaperData(user) {
   latestPost.className = "story-content card-text";
   latestPost.innerHTML = user.last_post;
   historyCard.appendChild(latestPost);
+
+
+  //set up pdf link
+
+  var url_string = window.location.href
+  console.log(url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length));
+  var id = url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
+  const titleElement = document.getElementById("name-container");
+
+  titleElement.setAttribute("href", '/pdf/'+id+'.pdf');
 
   //   const myPaper = document.getElementById("paper-container");
   //   get("/api/paper", { parent: "5c38f4241e4d643add432fbd" }, function(
