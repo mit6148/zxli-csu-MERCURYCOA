@@ -1,15 +1,11 @@
 function main() {
-
-
-
-
   const profileId = window.location.search.substring(1);
 
   //   get("/api/user", { id: profileId }, function(profileUser) {
   //     renderUserData(profileUser);
   //   });
 
-    get("/api/user", { id: profileId }, function(profileUser) {
+  get("/api/user", { id: profileId }, function(profileUser) {
     renderPaperData(profileUser);
   });
   // const user = {
@@ -25,13 +21,6 @@ function newPaperDOMObject() {
   const newStoryDiv = document.createElement("div");
   newStoryDiv.className = "input-group my-3";
 
-  //   const newStoryContent = document.createElement("input");
-  //   newStoryContent.setAttribute("type", "text");
-  //   newStoryContent.setAttribute("placeholder", "New Paper");
-  //   newStoryContent.className = "form-control";
-  //   newStoryContent.setAttribute("id", "story-content-input");
-  //   newStoryDiv.appendChild(newStoryContent);
-
   const newStoryButtonDiv = document.createElement("div");
   newStoryButtonDiv.className = "input-group-append";
   newStoryDiv.appendChild(newStoryButtonDiv);
@@ -40,7 +29,7 @@ function newPaperDOMObject() {
   newStorySubmit.innerHTML = "Submit Comment";
   newStorySubmit.className = "btn btn-outline-primary";
   newStorySubmit.addEventListener("click", () => {
-    window.location = "/uploadform";
+    window.location = "/api/upload_comment_form";
   });
 
   newStoryButtonDiv.appendChild(newStorySubmit);
@@ -61,14 +50,14 @@ function newPaperDOMObject() {
   return newStoryDiv;
 }
 
-// function submitStoryHandler() {
-//   const newStoryInput = document.getElementById("story-content-input");
+// function submitCommentHandler() {
+//   const newCommentInput = document.getElementById("story-content-input");
 
 //   const data = {
-//     content: newStoryInput.value
+//     content: newCommentInput.value
 //   };
 //   post("/api/uploadFile", data);
-//   newStoryInput.value = "";
+//   newCommentInput.value = "";
 // }
 
 function renderPaperData(user) {
@@ -128,15 +117,21 @@ function renderPaperData(user) {
   latestPost.innerHTML = user.last_post;
   historyCard.appendChild(latestPost);
 
-
   //set up pdf link
 
-  var url_string = window.location.href
-  console.log(url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length));
-  var id = url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
+  var url_string = window.location.href;
+  console.log(
+    url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
+  );
+  var fileName = url_string.substring(
+    url_string.lastIndexOf("/") + 1,
+    url_string.length
+  );
+  // var id = url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
   const titleElement = document.getElementById("name-container");
 
-  titleElement.setAttribute("href", '/pdf/'+id+'.pdf');
+  titleElement.setAttribute("href", "/static/pdf/" + fileName);
+  // titleElement.setAttribute("href", '/pdf/'+id+'.pdf');
 
   //   const myPaper = document.getElementById("paper-container");
   //   get("/api/paper", { parent: "5c38f4241e4d643add432fbd" }, function(

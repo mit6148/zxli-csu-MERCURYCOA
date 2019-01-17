@@ -22,9 +22,9 @@ router.get("/pdf/myproifle.pdf", function(req, res) {
   res.sendFile("myprofile.pdf", { root: "src/pdf" });
 });
 
-router.get("/uploadform", function(req, res) {
-  res.sendFile("upload.html", { root: "src/views" });
-});
+// router.get("/uploadform", function(req, res) {
+//   res.sendFile("upload.html", { root: "src/views" });
+// });
 router.get("/download", function(req, res) {
   // res.sendFile("upload.html", { root: "src/views" });
   res.download(path.join(__dirname, "myprofile.pdf"), function(err) {

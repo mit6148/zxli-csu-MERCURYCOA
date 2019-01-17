@@ -12,6 +12,40 @@ function main() {
     renderNavbar(user);
   });
 }
+
+function newPaperDOMObject() {
+  const newStoryDiv = document.createElement("div");
+  newStoryDiv.className = "input-group my-3";
+
+  const newStoryButtonDiv = document.createElement("div");
+  newStoryButtonDiv.className = "input-group-append";
+  newStoryDiv.appendChild(newStoryButtonDiv);
+
+  const newStorySubmit = document.createElement("button");
+  newStorySubmit.innerHTML = "Submit Comment";
+  newStorySubmit.className = "btn btn-outline-primary";
+  newStorySubmit.addEventListener("click", () => {
+    window.location = "/api/upload_paper_form";
+  });
+
+  newStoryButtonDiv.appendChild(newStorySubmit);
+
+  const DownloadButton = document.createElement("div");
+  DownloadButton.className = "input-group-append";
+  newStoryDiv.appendChild(DownloadButton);
+
+  const btnSubmit = document.createElement("button");
+  btnSubmit.innerHTML = "Download";
+  btnSubmit.className = "btn btn-outline-primary";
+  btnSubmit.addEventListener("click", () => {
+    window.location = "/download";
+  });
+
+  DownloadButton.appendChild(btnSubmit);
+
+  return newStoryDiv;
+}
+
 function paperDOMObject(paperJSON) {
   commentDiv = document.createElement("div");
   commentDiv.setAttribute("id", paperJSON._id);
@@ -83,6 +117,7 @@ function renderUserData(user) {
     // console.log(papersArr);
     // console.log(papersArr);
   });
+  document.getElementById("new-paper").appendChild(newPaperDOMObject());
 }
 
 main();
