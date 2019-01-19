@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PDF Page</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="navbar-brand">Public Peer Review Platform</div>
+      <div class="navbar-nav" id="nav-item-container">
+        <!-- navbar items are inserted here -->
+      </div>
+    </nav>
+
+    <div class="container text-center" id="paper-container">
+      <div class="large-paper-container text-center my-4"></div>
+      <hr />
+      <a id="name-container">Title<!-- name inserted here --></a>
+      <div id="new-paper"><!-- name inserted here --></div>
+
+      <div id="paper-container"><!-- papers inserted here --></div>
+      <div class="row mt-4">
+        <div class="col-4">
+          <h4>Abstract</h4>
+          <br />
+
+          <div class="card">
+            <div class="card-body" id="abstract-card">
+              I'm abstract.
+              <!-- last post inserted here -->
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <h4>Comments</h4>
+          <br />
+          <div class="card">
+            <div class="card-body" id="comment-card">
+              Comments
+              <!-- last post inserted here -->
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <h4>History</h4>
+          <br />
+          <div class="card">
+            <div class="card-body" id="history-card">
+              History
+              <!-- last post inserted here -->
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <h4>Statistics</h4>
+          <br />
+          <div class="card">
+            <div class="card-body" id="history-card">
+              <p>Downloads</p>
+              <p>Views</p>
+              <!-- last post inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/navbar.js"></script>
+  <script src="/static/js/paper.js"></script>
+  <script src="/static/js/pdf.js"></script>
+  <!-- <script src="/static/js/profile.js"></script> -->
+</html>

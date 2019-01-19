@@ -2,7 +2,6 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-
 // public endpoints
 router.get("/feed", function(req, res, next) {
   res.sendFile("index.html", { root: "src/views" });
@@ -18,18 +17,25 @@ router.get("/u/profile", function(req, res) {
 router.get("/paper/", function(req, res) {
   res.sendFile("paper.html", { root: "src/views" });
 });
-router.get("/pdf/myproifle.pdf", function(req, res) {
-  res.sendFile("myprofile.pdf", { root: "src/pdf" });
-});
 
 // router.get("/uploadform", function(req, res) {
 //   res.sendFile("upload.html", { root: "src/views" });
 // });
-router.get("/download", function(req, res) {
-  // res.sendFile("upload.html", { root: "src/views" });
-  res.download(path.join(__dirname, "myprofile.pdf"), function(err) {
-    console.log(err);
-  });
+router.get("/download/:fileName", function(req, res) {
+  console.log("download");
+  res.download(__dirname + "/../../public/pdf/" + req.params.fileName);
 });
+
+// router.get("/viewpaper", function(req, res) {
+//   // res.sendFile("upload.html", { root: "src/views" });
+//   Paper.findOneAndUpdate(
+//     { fileName: req.query.fileName },
+//     { $inc: { views: 1 } },
+//     function(paper) {
+//       console.log("view update");
+//     }
+//   );
+//   res.redirect("/static/pdf/" + req.query.fileName);
+// });
 
 module.exports = router;

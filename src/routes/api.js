@@ -9,7 +9,7 @@ const Comment = require("../models/comment");
 const User = require("../models/user");
 const Paper = require("../models/paper");
 const CommentPaper = require("../models/commentpaper");
-
+const ObjectId = require("mongoose").Types.ObjectId;
 const router = express.Router();
 const path = require("path");
 
@@ -87,6 +87,31 @@ router.get("/comment", function(req, res) {
     res.send(comments);
   });
 });
+
+router.get("/user_papers", function(req, res) {
+  console.log(req.query.user_id);
+  Paper.find({ user: new ObjectId(req.query.user_id) }, function(err, papers) {
+    console.log(papers);
+    console.log("ddddd");
+    console.log(err);
+    res.send(papers);
+  });
+});
+router.get("/user_comments", function(req, res) {
+  console.log(req.query.user_id);
+  CommentPaper.find({ user: new ObjectId(req.query.user_id) }, function(
+    err,
+    papers
+  ) {
+    console.log(papers);
+    console.log("ddddd");
+    console.log(err);
+    res.send(papers);
+  });
+});
+// SampleModel.find( { dates : { $elemMatch: {  date : { $gte: 'DATE_VALUE' } } } } )
+//SampleModel.find( { 'dates.date': { $gte: 'DATE_VALUE' } } )
+
 router.get("/mypaper", function(req, res) {
   Paper.find({ parent: req.query.parent }, function(err, papers) {
     res.send(papers);
@@ -102,6 +127,7 @@ router.get("/allpaper", function(req, res) {
 router.get("/paper/:_id", (req, res) => {
   const errors = {};
   Paper.findOne({ id: req.query._id })
+    // .populate("user")
     .then(paper => {
       if (!paper) {
         errors = "There is no paper for this user";
@@ -110,7 +136,7 @@ router.get("/paper/:_id", (req, res) => {
 
       //res.json(paper);
       res.sendFile("paper.html", { root: "src/views" });
-      console.log(paper);
+      // console.log(paper.user.name);
     })
     .catch(err =>
       res.status(404).json({ paper: "There is no profile for this user" })
@@ -153,7 +179,7 @@ router.get("/paper_length", function(req, res) {
 
 router.get("/views", function(req, res) {
   //update model fields
-  Paper.find({}, function(err, papers) {
+  Paper.findOneAndUpdate({}, function(err, papers) {
     res.send(papers);
   });
 });
@@ -167,130 +193,169 @@ router.get("/upload_comment_form", connect.ensureLoggedIn(), function(
 ) {
   res.sendFile("upload_comment.html", { root: "src/views" });
 });
-
-router.post("/uploadPaper", upload.single("photo"), function(req, res, next) {
-  console.log("no problem");
-  console.log("file data", req.file);
-  if (req.file == undefined) {
-    return res.status(422).send({ error: "You must select a file to upload." });
-  }
-  //console.log(req.body.author)
-  Paper.find({}, function(err, papers) {
-    console.log("hello");
-    console.log(papers);
-    const num_papers = papers.length;
-
-    const product = new Paper({
-      _id: new mongoose.Types.ObjectId(),
-      // uploader: req.body.uploader,
-      // uploader: "Ajay",
-      filePath: req.file.path,
-      // fileName: req.file.originalname,
-      fileName: req.file.filename,
-      // fileName: req.body.title + "-" + Date.now() + ".pdf",
-      title: req.body.title,
-      author: req.body.author,
-      abstract: req.body.abstract,
-      subject: req.body.subject,
-      type: req.body.type,
-      user_parent: req.body.user_parent,
-      // paper_parent: req.body.parent_parent
-
-      papernumber: `P-${num_papers + 1}`
-      // papernumber: {
-      //   type: paper ? `P-${num_papers + 1}` : `C-${num_papers + 1}`
-      // }
-    });
-    product
-      .save()
-      .then(result => {
-        console.log("save");
-        Paper.find({}).exec(function(err, files) {
-          if (files) {
-            res.status(201).json({
-              message: "File uploaded successfully",
-              allFilesDetail: files
-            });
-          } else {
-            res.status(204).json({
-              message: "No file detail exist",
-              allFilesDetail: files
-            });
-          }
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json({
-          error: err
-        });
-      });
-  });
+router.get("/pdf_embed", connect.ensureLoggedIn(), function(req, res) {
+  res.sendFile("pdf.html", { root: "src/views" });
 });
 
-router.post("/uploadCommentPaper", upload.single("photo"), function(
-  req,
-  res,
-  next
-) {
-  console.log("no problem");
-  console.log("file data", req.file);
-  if (req.file == undefined) {
-    return res.status(422).send({ error: "You must select a file to upload." });
-  }
-  //console.log(req.body.author)
-  CommentPaper.find({}, function(err, papers) {
-    console.log("hello");
-    console.log(papers);
-    const num_papers = papers.length;
-
-    const newComment = new CommentPaper({
-      _id: new mongoose.Types.ObjectId(),
-      // uploader: req.body.uploader,
-      // uploader: "Ajay",
-      filePath: req.file.path,
-      // fileName: req.file.originalname,
-      fileName: req.file.filename,
-      // fileName: req.body.title + "-" + Date.now() + ".pdf",
-      title: req.body.title,
-      author: req.body.author,
-      // abstract: req.body.abstract,
-      // subject: req.body.subject,
-      // type: req.body.type,
-      user_parent: req.body.user_parent,
-      paper_parent: req.body.parent_parent,
-
-      papernumber: `C-${num_papers + 1}`
-      // papernumber: {
-      //   type: paper ? `P-${num_papers + 1}` : `C-${num_papers + 1}`
-      // }
-    });
-    newComment
-      .save()
-      .then(result => {
-        console.log("save");
-        CommentPaper.find({}).exec(function(err, files) {
-          if (files) {
-            res.status(201).json({
-              message: "File uploaded successfully",
-              allFilesDetail: files
-            });
-          } else {
-            res.status(204).json({
-              message: "No file detail exist",
-              allFilesDetail: files
-            });
-          }
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json({
-          error: err
-        });
-      });
-  });
+router.get("/viewpaper", function(req, res) {
+  // res.sendFile("upload.html", { root: "src/views" });
+  Paper.findOneAndUpdate(
+    { fileName: req.query.fileName },
+    { $inc: { views: 1 } },
+    function(paper) {
+      console.log("view update");
+    }
+  );
+  res.redirect("/static/pdf/" + req.query.fileName);
 });
+
+router.post(
+  "/uploadPaper",
+  connect.ensureLoggedIn(),
+  upload.single("photo"),
+  function(req, res, next) {
+    console.log("no problem");
+    console.log("file data", req.file);
+    if (req.file == undefined) {
+      return res
+        .status(422)
+        .send({ error: "You must select a file to upload." });
+    }
+    //console.log(req.body.author)
+    Paper.find({}, function(err, papers) {
+      console.log("hello");
+      const num_papers = papers.length;
+      //const num_version ：query this user paperName 相同的有几个
+      let num_version = 0;
+      Paper.find({ user: req.user._id, title: req.body.title }, function(
+        err,
+        paper
+      ) {
+        // console.log({paper.length});
+        num_version = paper.length;
+        const product = new Paper({
+          _id: new mongoose.Types.ObjectId(),
+          // uploader: req.body.uploader,
+          // uploader: "Ajay",
+          filePath: req.file.path,
+          // fileName: req.file.originalname,
+          fileName: req.file.filename,
+          // fileName: req.body.title + "-" + Date.now() + ".pdf",
+          user: req.user._id,
+          title: req.body.title,
+          author: req.body.author,
+          abstract: req.body.abstract,
+          subject: req.body.subject,
+          // type: req.body.type,
+          user_parent: req.body.user_parent,
+          // paper_parent: req.body.parent_parent
+          paperName: req.file.originalname,
+
+          papernumber: `P-${num_papers + 1} - V ${num_version + 1}`
+          // papernumber: {
+          //   type: paper ? `P-${num_papers + 1}` : `C-${num_papers + 1}`
+          // }
+        });
+        product
+          .save()
+          .then(result => {
+            console.log("save");
+            Paper.find({}).exec(function(err, files) {
+              if (files) {
+                res.status(201).json({
+                  message: "File uploaded successfully",
+                  allFilesDetail: files
+                });
+              } else {
+                res.status(204).json({
+                  message: "No file detail exist",
+                  allFilesDetail: files
+                });
+              }
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(500).json({
+              error: err
+            });
+          });
+      });
+    });
+  }
+);
+
+router.post(
+  "/uploadCommentPaper",
+  connect.ensureLoggedIn(),
+  upload.single("photo"),
+  function(req, res, next) {
+    console.log("no problem");
+    console.log("file data", req.file);
+    if (req.file == undefined) {
+      return res
+        .status(422)
+        .send({ error: "You must select a file to upload." });
+    }
+    //console.log(req.body.author)
+    CommentPaper.find({}, function(err, papers) {
+      console.log("hello");
+      const num_papers = papers.length;
+
+      const newComment = new CommentPaper({
+        _id: new mongoose.Types.ObjectId(),
+        // uploader: req.body.uploader,
+        // uploader: "Ajay",
+        filePath: req.file.path,
+        fileName: req.file.filename,
+        commentPaperName: req.file.originalname,
+
+        user: req.user._id,
+        title: req.body.title,
+        author: req.body.author,
+
+        user_parent: req.body.user_parent,
+        paper_parent: req.body.parent_parent,
+
+        papernumber: `C-${num_papers + 1}`
+        // papernumber: {
+        //   type: paper ? `P-${num_papers + 1}` : `C-${num_papers + 1}`
+        // }
+      });
+      newComment
+        .save()
+        .then(result => {
+          console.log("save");
+          CommentPaper.find({}).exec(function(err, files) {
+            if (files) {
+              res.status(201).json({
+                message: "File uploaded successfully",
+                allFilesDetail: files
+              });
+              console.log(req.query.fileName);
+              Paper.findOneAndUpdate(
+                { fileName: req.query.fileName },
+                { $push: { comments: newComment._id } }
+              ).then(function(paper) {
+                console.log(paper);
+              });
+            } else {
+              res.status(204).json({
+                message: "No file detail exist",
+                allFilesDetail: files
+              });
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({
+            error: err
+          });
+        });
+    });
+  }
+);
 
 // router.post("/uploadFile", upload.single("photo"), function(req, res, next) {
 //   console.log("no problem");

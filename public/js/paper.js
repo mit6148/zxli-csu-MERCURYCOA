@@ -18,6 +18,16 @@ function main() {
   });
 }
 function newPaperDOMObject() {
+  //set up pdf link
+
+  var url_string = window.location.href;
+  console.log(
+    url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
+  );
+  var fileName = url_string.substring(
+    url_string.lastIndexOf("/") + 1,
+    url_string.length
+  );
   const newStoryDiv = document.createElement("div");
   newStoryDiv.className = "input-group my-3";
 
@@ -38,44 +48,76 @@ function newPaperDOMObject() {
   DownloadButton.className = "input-group-append";
   newStoryDiv.appendChild(DownloadButton);
 
-  const btnSubmit = document.createElement("button");
+  const btnSubmit = document.createElement("a");
   btnSubmit.innerHTML = "Download";
   btnSubmit.className = "btn btn-outline-primary";
-  btnSubmit.addEventListener("click", () => {
-    window.location = "/download";
-  });
+  btnSubmit.setAttribute("href", "/static/pdf/" + fileName);
+
+  // btnSubmit.addEventListener("click", () => {
+  //   get("/download/" + fileName, {}, () => {
+  //     console.log("helppp");
+  //   });
+  // });
 
   DownloadButton.appendChild(btnSubmit);
 
   return newStoryDiv;
 }
 
-// function submitCommentHandler() {
-//   const newCommentInput = document.getElementById("story-content-input");
+function storyDOMObject(storyJSON, user) {
+  const card = document.createElement("div");
+  card.setAttribute("id", storyJSON._id);
+  card.className = "story card";
 
-//   const data = {
-//     content: newCommentInput.value
-//   };
-//   post("/api/uploadFile", data);
-//   newCommentInput.value = "";
-// }
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-body";
+  card.appendChild(cardBody);
+
+  const creatorSpan = document.createElement("a");
+  creatorSpan.className = "story-creator card-title";
+  creatorSpan.innerHTML = storyJSON.creator_name;
+  creatorSpan.setAttribute("href", "/u/profile?" + storyJSON.creator_id);
+  cardBody.appendChild(creatorSpan);
+
+  const contentSpan = document.createElement("p");
+  contentSpan.className = "story-content card-text";
+  contentSpan.innerHTML = storyJSON.content;
+  cardBody.appendChild(contentSpan);
+
+  const cardFooter = document.createElement("div");
+  cardFooter.className = "card-footer";
+  card.appendChild(cardFooter);
+
+  const commentsDiv = document.createElement("div");
+  commentsDiv.setAttribute("id", storyJSON._id + "-comments");
+  commentsDiv.className = "story-comments";
+  cardFooter.appendChild(commentsDiv);
+
+  if (user._id !== undefined)
+    cardFooter.appendChild(newCommentDOMObject(storyJSON._id));
+
+  return card;
+}
 
 function renderPaperData(user) {
   if (user._id !== undefined)
     document.getElementById("new-paper").appendChild(newPaperDOMObject());
+  //set up pdf link
+
+  var url_string = window.location.href;
+  console.log(
+    url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
+  );
+  var fileName = url_string.substring(
+    url_string.lastIndexOf("/") + 1,
+    url_string.length
+  );
   // rendering name
   const nameContainer = document.getElementById("name-container");
   const nameHeader = document.createElement("h1");
   nameHeader.innerHTML = user.name;
   nameContainer.appendChild(nameHeader);
 
-  // rendering profile image
-  //   const profileImage = document.getElementById("profile-image");
-  //   profileImage.style =
-  //     "background-image:url(https://i.pinimg.com/736x/98/e0/7d/98e07decc7c1ca58236995de3567e46a--cat-shirts-kitties-cutest.jpg)";
-
-  // rendering latest post
-  //rendering comment
   const comment = document.getElementById("comment-card");
 
   const commentSpan = document.createElement("a");
@@ -93,16 +135,6 @@ function renderPaperData(user) {
 
   const description = document.getElementById("abstract-card");
 
-  const desSpan = document.createElement("a");
-  desSpan.className = "abstract card-title";
-  desSpan.innerHTML = user.papers[0];
-  desSpan.setAttribute("href", "/u/pdf");
-  // desSpan.setAttribute("href", "https://www.youtube.com/watch?v=Mgto6wNuK4Y");
-  // desSpan.setAttribute("href", "/u/profile?" + user._id);
-  description.appendChild(desSpan);
-
-  // render history
-
   const historyCard = document.getElementById("history-card");
 
   const historySpan = document.createElement("a");
@@ -117,31 +149,21 @@ function renderPaperData(user) {
   latestPost.innerHTML = user.last_post;
   historyCard.appendChild(latestPost);
 
-  //set up pdf link
-
-  var url_string = window.location.href;
-  console.log(
-    url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
-  );
-  var fileName = url_string.substring(
-    url_string.lastIndexOf("/") + 1,
-    url_string.length
-  );
   // var id = url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
   const titleElement = document.getElementById("name-container");
 
-  titleElement.setAttribute("href", "/static/pdf/" + fileName);
-  // titleElement.setAttribute("href", '/pdf/'+id+'.pdf');
+  // titleElement.setAttribute("href", "/api/pdf_embed");
+  titleElement.setAttribute("href", "/api/viewpaper?fileName=" + fileName);
 
-  //   const myPaper = document.getElementById("paper-container");
-  //   get("/api/paper", { parent: "5c38f4241e4d643add432fbd" }, function(
-  //     papersArr
-  //   ) {
-  //     for (let j = 0; j < papersArr.length; j++) {
-  //       const currentPaper = papersArr[j];
-  //       myPaper.appendChild(currentPaper);
-  //     }
-  //   });
+  // const myPaper = document.getElementById("stories");
+  // get("/api/allpaper", { parent: "5c38f4241e4d643add432fbd" }, function(
+  //   papersArr
+  // ) {
+  //   for (let j = 0; j < papersArr.length; j++) {
+  //     const currentPaper = papersArr[j];
+  //     myPaper.appendChild(currentPaper);
+  //   }
+  // });
 }
 
 main();
