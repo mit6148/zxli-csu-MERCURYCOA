@@ -1,18 +1,24 @@
 function main() {
-  const profileId = window.location.search.substring(1);
+  // const fileName = window.location.search.substring(1);
+  var url_string = window.location.href;
+  console.log(
+    url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
+  );
+  var fileName = url_string.substring(
+    url_string.lastIndexOf("/") + 1,
+    url_string.length
+  );
+  console.log(fileName);
+  console.log("^filename");
 
   //   get("/api/user", { id: profileId }, function(profileUser) {
   //     renderUserData(profileUser);
   //   });
 
-  get("/api/user", { id: profileId }, function(profileUser) {
-    renderPaperData(profileUser);
+  get("/api/onepaper", { fileName: fileName }, function(paper) {
+    renderPaperData(paper);
   });
-  // const user = {
-  //   _id: 'anonid',
-  //   name: 'Anonymous',
-  //   last_post: 'Anon was here',
-  // };
+
   get("/api/whoami", {}, function(user) {
     renderNavbar(user);
   });
@@ -51,7 +57,10 @@ function newPaperDOMObject() {
   const btnSubmit = document.createElement("a");
   btnSubmit.innerHTML = "Download";
   btnSubmit.className = "btn btn-outline-primary";
-  btnSubmit.setAttribute("href", "/static/pdf/" + fileName);
+  // btnSubmit.setAttribute("href", "/static/pdf/" + fileName);
+
+  btnSubmit.setAttribute("href", "/api/downloadpaper?fileName=" + fileName);
+  // titleElement.setAttribute("href", "/api/viewpaper?fileName=" + fileName);
 
   // btnSubmit.addEventListener("click", () => {
   //   get("/download/" + fileName, {}, () => {
@@ -93,14 +102,14 @@ function storyDOMObject(storyJSON, user) {
   commentsDiv.className = "story-comments";
   cardFooter.appendChild(commentsDiv);
 
-  if (user._id !== undefined)
-    cardFooter.appendChild(newCommentDOMObject(storyJSON._id));
+  // if (user._id !== undefined)
+  cardFooter.appendChild(newCommentDOMObject(storyJSON._id));
 
   return card;
 }
 
-function renderPaperData(user) {
-  if (user._id !== undefined)
+function renderPaperData(paper) {
+  if (paper.fileName !== undefined)
     document.getElementById("new-paper").appendChild(newPaperDOMObject());
   //set up pdf link
 
@@ -115,44 +124,78 @@ function renderPaperData(user) {
   // rendering name
   const nameContainer = document.getElementById("name-container");
   const nameHeader = document.createElement("h1");
-  nameHeader.innerHTML = user.name;
+  // nameHeader.innerHTML = user.name;
   nameContainer.appendChild(nameHeader);
 
   const comment = document.getElementById("comment-card");
 
   const commentSpan = document.createElement("a");
   commentSpan.className = "comment-creator card-title";
-  commentSpan.innerHTML = user.name;
-  commentSpan.setAttribute("href", "/u/profile?" + user._id);
+  commentSpan.innerHTML = paper.abstract;
+  // commentSpan.setAttribute("href", "/u/profile?" + user._id);
   comment.appendChild(commentSpan);
 
   const commentItem = document.createElement("p");
   commentItem.className = "story-content card-text";
-  commentItem.innerHTML = user.last_post;
+  // commentItem.innerHTML = user.last_post;
   comment.appendChild(commentItem);
 
   // rendering description
 
-  const description = document.getElementById("abstract-card");
+  const version_num = document.getElementById("abstract-card");
+  const versionSpan = document.createElement("a");
+  versionSpan.className = "story-creator card-title";
+  console.log(paper);
+  versionSpan.innerHTML = paper.papernumber;
+  // historySpan.setAttribute("href", "/pdf/myprofile.pdf");
+  // historySpan.setAttribute("href", "/u/profile?" + user._id);
+  version_num.appendChild(versionSpan);
+
+  const tag = document.createElement("div");
+  tag.className = "card-footer";
+  tag.innerHTML = paper.subject;
+
+  version_num.appendChild(tag);
 
   const historyCard = document.getElementById("history-card");
 
   const historySpan = document.createElement("a");
   historySpan.className = "story-creator card-title";
-  historySpan.innerHTML = "version-1";
-  historySpan.setAttribute("href", "/pdf/myprofile.pdf");
+  console.log(paper);
+  historySpan.innerHTML = paper.abstract;
+  // historySpan.setAttribute("href", "/pdf/myprofile.pdf");
   // historySpan.setAttribute("href", "/u/profile?" + user._id);
   historyCard.appendChild(historySpan);
 
-  const latestPost = document.createElement("p");
-  latestPost.className = "story-content card-text";
-  latestPost.innerHTML = user.last_post;
-  historyCard.appendChild(latestPost);
+  const viewsCard = document.getElementById("views-card");
+
+  const viewsSpan = document.createElement("a");
+  viewsSpan.className = "story-creator card-title";
+  // console.log(paper);
+  viewsSpan.innerHTML = paper.views;
+  // historySpan.setAttribute("href", "/pdf/myprofile.pdf");
+  // historySpan.setAttribute("href", "/u/profile?" + user._id);
+  viewsCard.appendChild(viewsSpan);
+
+  const downloadCard = document.getElementById("downloads-card");
+
+  const downloadSpan = document.createElement("a");
+  downloadSpan.className = "story-creator card-title";
+  // console.log(paper);
+  downloadSpan.innerHTML = paper.downloads;
+  // historySpan.setAttribute("href", "/pdf/myprofile.pdf");
+  // historySpan.setAttribute("href", "/u/profile?" + user._id);
+  downloadCard.appendChild(downloadSpan);
+
+  // const latestPost = document.createElement("p");
+  // latestPost.className = "story-content card-text";
+  // // latestPost.innerHTML = user.last_post;
+  // historyCard.appendChild(latestPost);
 
   // var id = url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
   const titleElement = document.getElementById("name-container");
 
-  // titleElement.setAttribute("href", "/api/pdf_embed");
+  titleElement.innerHTML = paper.title;
   titleElement.setAttribute("href", "/api/viewpaper?fileName=" + fileName);
 
   // const myPaper = document.getElementById("stories");

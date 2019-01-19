@@ -16,7 +16,6 @@ const path = require("path");
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
     console.log("file");
-    // console.log(file.originalname);
     cb(null, path.resolve(__dirname, "../../public/pdf"));
   },
   filename: function(req, file, cb) {
@@ -52,6 +51,14 @@ router.get("/user", function(req, res) {
   User.findOne({ id: req.query._id }, function(err, user) {
     console.log(user);
     res.send(user);
+  });
+});
+
+router.get("/onepaper", function(req, res) {
+  console.log(req.query.fileName);
+  Paper.findOne({ fileName: req.query.fileName }, function(err, paper) {
+    console.log(paper);
+    res.send(paper);
   });
 });
 
@@ -97,6 +104,7 @@ router.get("/user_papers", function(req, res) {
     res.send(papers);
   });
 });
+
 router.get("/user_comments", function(req, res) {
   console.log(req.query.user_id);
   CommentPaper.find({ user: new ObjectId(req.query.user_id) }, function(
@@ -124,8 +132,46 @@ router.get("/allpaper", function(req, res) {
   });
 });
 
+router.get("/toppaper", function(req, res) {
+  Paper.find({ views: { $exists: true } })
+    .sort({ views: -1 })
+    .limit(10)
+    .exec(function(err, papers) {
+      res.send(papers);
+      console.log(papers);
+      console.log("top papers");
+    });
+});
+//var leaderboard = User.find( {points: {$exists: true}} ).sort({points : -1}).limit(5).toArray();
+
+router.get("/cate/physics", function(req, res) {
+  Paper.find({ subject: "physics" }, function(err, papers) {
+    res.send(papers);
+  });
+});
+
+router.get("/cate/chemistry", function(req, res) {
+  Paper.find({ subject: "chemistry" }, function(err, papers) {
+    res.send(papers);
+  });
+});
+
+router.get("/cate/math", function(req, res) {
+  Paper.find({ subject: "math" }, function(err, papers) {
+    res.send(papers);
+  });
+});
+
+router.get("/cate/econ", function(req, res) {
+  Paper.find({ subject: "econ" }, function(err, papers) {
+    res.send(papers);
+  });
+});
+
 router.get("/paper/:_id", (req, res) => {
+  // router.get("/paper/:fileName", (req, res) => {
   const errors = {};
+  // Paper.findOne({ fileName: req.params.fileName })
   Paper.findOne({ id: req.query._id })
     // .populate("user")
     .then(paper => {
@@ -204,6 +250,18 @@ router.get("/viewpaper", function(req, res) {
     { $inc: { views: 1 } },
     function(paper) {
       console.log("view update");
+    }
+  );
+  res.redirect("/static/pdf/" + req.query.fileName);
+});
+
+router.get("/downloadpaper", function(req, res) {
+  // res.sendFile("upload.html", { root: "src/views" });
+  Paper.findOneAndUpdate(
+    { fileName: req.query.fileName },
+    { $inc: { downloads: 1 } },
+    function(paper) {
+      console.log("download update");
     }
   );
   res.redirect("/static/pdf/" + req.query.fileName);
@@ -332,12 +390,17 @@ router.post(
                 message: "File uploaded successfully",
                 allFilesDetail: files
               });
-              console.log(req.query.fileName);
+              console.log(req.params.fileName);
+              console.log("^happy");
+
               Paper.findOneAndUpdate(
-                { fileName: req.query.fileName },
-                { $push: { comments: newComment._id } }
+                { fileName: req.params.fileName },
+                // { fileName: req.query.fileName },
+                { $push: { comments: newComment.fileName } },
+                { new: true }
               ).then(function(paper) {
                 console.log(paper);
+                console.log("happyy");
               });
             } else {
               res.status(204).json({

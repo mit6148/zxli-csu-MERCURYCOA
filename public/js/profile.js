@@ -23,6 +23,7 @@ function paperDOMObject(paperJSON) {
   commentCreatorSpan.className = "comment-creator";
   commentCreatorSpan.innerHTML = paperJSON.fileName;
   commentCreatorSpan.setAttribute("href", "/api/paper/" + paperJSON.fileName);
+  // commentCreatorSpan.setAttribute("href", "/api/paper/" + paperJSON.fileName);
 
   commentDiv.appendChild(commentCreatorSpan);
 

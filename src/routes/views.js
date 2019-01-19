@@ -23,6 +23,13 @@ router.get("/paper/", function(req, res) {
 // });
 router.get("/download/:fileName", function(req, res) {
   console.log("download");
+  Paper.findOneAndUpdate(
+    { fileName: req.query.fileName },
+    { $inc: { downloads: 1 } },
+    function(paper) {
+      console.log("download update");
+    }
+  );
   res.download(__dirname + "/../../public/pdf/" + req.params.fileName);
 });
 

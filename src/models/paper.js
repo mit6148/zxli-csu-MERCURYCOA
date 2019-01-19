@@ -6,25 +6,26 @@ const Schema = mongoose.Schema;
 const PaperModelSchema = new mongoose.Schema({
   comments: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Comment"
+      type: String,
+      ref: "CommentPaper"
     }
   ],
   user: { type: Schema.Types.ObjectId, ref: "User" },
-  paper_parent: { type: String, required: false },
+  // paper_parent: { type: String, required: false },
   author: { type: String, required: false },
   title: { type: String, required: false },
   abstract: { type: String, required: false },
+  keywords: { type: String, required: false },
   subject: { type: String, required: false },
   // select list
   // method: String,
-  views: Number,
-  downloads: { type: Number, required: false },
+  views: { type: Number, default: 0, required: false },
+  downloads: { type: Number, default: 0, required: false },
   papernumber: { type: String, required: false },
   filePath: { type: String, required: false },
-  fileName: { type: String, required: false },
+  fileName: { type: String, required: false }
   // file name for version
-  fileVerName: { type: String, required: false }
+  // fileVerName: { type: String, required: false }
 });
 
 // compile model from schema
