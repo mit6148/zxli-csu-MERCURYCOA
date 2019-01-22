@@ -13,9 +13,13 @@ const CommentPaperModelSchema = new mongoose.Schema({
   // parent_paper_id: String,
   commentnumber: String,
   filePath: { type: String, required: false },
-  fileName: { type: String, required: false }
+  fileName: { type: String, required: false },
   // file name for version
   // fileVerName: { type: String, required: false }
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 // compile model from schema

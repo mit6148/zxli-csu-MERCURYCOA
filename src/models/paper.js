@@ -23,7 +23,11 @@ const PaperModelSchema = new mongoose.Schema({
   downloads: { type: Number, default: 0, required: false },
   papernumber: { type: String, required: false },
   filePath: { type: String, required: false },
-  fileName: { type: String, required: false }
+  fileName: { type: String, required: false },
+  date: {
+    type: Date,
+    default: Date.now
+  }
   // file name for version
   // fileVerName: { type: String, required: false }
 });

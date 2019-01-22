@@ -17,6 +17,7 @@
     "mongoose": "^5.0.0",
     "mongoose-find-and-filter": "^1.0.0",
     "multer": "^1.4.1",
+    "particles.js": "^2.0.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "session": "^0.1.0",

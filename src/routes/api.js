@@ -19,7 +19,8 @@ var storage = multer.diskStorage({
     cb(null, path.resolve(__dirname, "../../public/pdf"));
   },
   filename: function(req, file, cb) {
-    cb(null, file.originalname + "-" + Date.now() + ".pdf");
+    // cb(null, file.originalname + "-" + Date.now() + ".pdf");
+    cb(null, Date.now() + "-" + file.originalname);
   }
   // filename: function(req, file, cb) {
   //   cb(null, file.originalname);
@@ -134,7 +135,7 @@ router.get("/allpaper", function(req, res) {
 
 router.get("/toppaper", function(req, res) {
   Paper.find({ views: { $exists: true } })
-    .sort({ views: -1 })
+    .sort({ views: 1 })
     .limit(10)
     .exec(function(err, papers) {
       res.send(papers);
@@ -395,6 +396,7 @@ router.post(
 
               Paper.findOneAndUpdate(
                 { fileName: req.params.fileName },
+                // { fileName: "100solutions.pdf-1547920220413.pdf" },
                 // { fileName: req.query.fileName },
                 { $push: { comments: newComment.fileName } },
                 { new: true }

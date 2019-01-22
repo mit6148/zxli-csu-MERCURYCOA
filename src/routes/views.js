@@ -6,8 +6,14 @@ const path = require("path");
 router.get("/feed", function(req, res, next) {
   res.sendFile("index.html", { root: "src/views" });
 });
-router.get("/", function(req, res, next) {
+
+router.get("/newest_paper", function(req, res, next) {
   res.sendFile("home.html", { root: "src/views" });
+});
+
+router.get("/", function(req, res, next) {
+  res.sendFile("index3.html", { root: "src/views" });
+  // res.sendFile("home.html", { root: "src/views" });
 });
 
 router.get("/u/profile", function(req, res) {

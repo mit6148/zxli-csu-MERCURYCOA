@@ -16,6 +16,9 @@ function renderNavbar(user) {
   if (user._id !== undefined) {
     navbarDiv.appendChild(newNavbarItem("Dashboard", "/u/profile?" + user._id));
     navbarDiv.appendChild(newNavbarItem("Logout", "/logout"));
+    navbarDiv.appendChild(
+      newNavbarItem("Submit Paper", "/api/upload_paper_form")
+    );
   } else {
     navbarDiv.appendChild(newNavbarItem("Login", "/auth/google"));
   }

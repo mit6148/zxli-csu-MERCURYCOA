@@ -1,14 +1,4 @@
 function main() {
-  //   const profileId = window.location.search.substring(1);
-  // get("/api/user", { id: profileId }, function(profileUser) {
-  //   renderUserData(profileUser);
-  // });
-  // const user = {
-  //   _id: 'anonid',
-  //   name: 'Anonymous',
-  //   last_post: 'Anon was here',
-  // };
-
   get("/api/toppaper", {}, function(papers) {
     renderTopPaper(papers);
   });
@@ -45,28 +35,25 @@ function paperDOMObject(paperJSON) {
 
   commentCreatorSpan = document.createElement("a");
   commentCreatorSpan.className = "comment-creator";
-  commentCreatorSpan.innerHTML = paperJSON.fileName;
+  commentCreatorSpan.innerHTML = paperJSON.title;
   commentCreatorSpan.setAttribute("href", "/api/paper/" + paperJSON.fileName);
-  // commentCreatorSpan.setAttribute("href", "/api/paper/" + paperJSON._id);
-
-  //   commentCreatorSpan.setAttribute("href", "/paper");
-
   commentDiv.appendChild(commentCreatorSpan);
 
   commentContentSpan = document.createElement("span");
   commentContentSpan.className = "comment-content";
-  commentContentSpan.innerHTML = " | " + paperJSON.author;
+  commentContentSpan.innerHTML = " | submitted at " + paperJSON.date;
   commentDiv.appendChild(commentContentSpan);
 
   return commentDiv;
 }
 
 function renderPaper(papers) {
-  const storiesDiv = document.getElementById("papers");
+  const storiesDiv = document.getElementById("newest-papers");
   for (let i = 0; i < papers.length; i++) {
     const currentStory = papers[i];
     storiesDiv.prepend(paperDOMObject(currentStory));
   }
+  document.getElementById("new-paper").appendChild(newPaperDOMObject());
 }
 
 function renderPhysicsPaper(papers) {
@@ -107,6 +94,26 @@ function renderTopPaper(papers) {
     const currentStory = papers[i];
     storiesDiv.prepend(paperDOMObject(currentStory));
   }
+}
+
+function newPaperDOMObject() {
+  const newStoryDiv = document.createElement("div");
+  newStoryDiv.className = "input-group my-3";
+
+  const newStoryButtonDiv = document.createElement("div");
+  newStoryButtonDiv.className = "input-group-append";
+  newStoryDiv.appendChild(newStoryButtonDiv);
+
+  const newStorySubmit = document.createElement("button");
+  newStorySubmit.innerHTML = "Upload A New Paper";
+  newStorySubmit.className = "btn btn-outline-primary";
+  newStorySubmit.addEventListener("click", () => {
+    window.location = "/api/upload_paper_form";
+  });
+
+  newStoryButtonDiv.appendChild(newStorySubmit);
+
+  return newStoryDiv;
 }
 
 main();

@@ -73,40 +73,40 @@ function newPaperDOMObject() {
   return newStoryDiv;
 }
 
-function storyDOMObject(storyJSON, user) {
-  const card = document.createElement("div");
-  card.setAttribute("id", storyJSON._id);
-  card.className = "story card";
+// function storyDOMObject(storyJSON, user) {
+//   const card = document.createElement("div");
+//   card.setAttribute("id", storyJSON._id);
+//   card.className = "story card";
 
-  const cardBody = document.createElement("div");
-  cardBody.className = "card-body";
-  card.appendChild(cardBody);
+//   const cardBody = document.createElement("div");
+//   cardBody.className = "card-body";
+//   card.appendChild(cardBody);
 
-  const creatorSpan = document.createElement("a");
-  creatorSpan.className = "story-creator card-title";
-  creatorSpan.innerHTML = storyJSON.creator_name;
-  creatorSpan.setAttribute("href", "/u/profile?" + storyJSON.creator_id);
-  cardBody.appendChild(creatorSpan);
+//   const creatorSpan = document.createElement("a");
+//   creatorSpan.className = "story-creator card-title";
+//   creatorSpan.innerHTML = storyJSON.creator_name;
+//   creatorSpan.setAttribute("href", "/u/profile?" + storyJSON.creator_id);
+//   cardBody.appendChild(creatorSpan);
 
-  const contentSpan = document.createElement("p");
-  contentSpan.className = "story-content card-text";
-  contentSpan.innerHTML = storyJSON.content;
-  cardBody.appendChild(contentSpan);
+//   const contentSpan = document.createElement("p");
+//   contentSpan.className = "story-content card-text";
+//   contentSpan.innerHTML = storyJSON.content;
+//   cardBody.appendChild(contentSpan);
 
-  const cardFooter = document.createElement("div");
-  cardFooter.className = "card-footer";
-  card.appendChild(cardFooter);
+//   const cardFooter = document.createElement("div");
+//   cardFooter.className = "card-footer";
+//   card.appendChild(cardFooter);
 
-  const commentsDiv = document.createElement("div");
-  commentsDiv.setAttribute("id", storyJSON._id + "-comments");
-  commentsDiv.className = "story-comments";
-  cardFooter.appendChild(commentsDiv);
+//   const commentsDiv = document.createElement("div");
+//   commentsDiv.setAttribute("id", storyJSON._id + "-comments");
+//   commentsDiv.className = "story-comments";
+//   cardFooter.appendChild(commentsDiv);
 
-  // if (user._id !== undefined)
-  cardFooter.appendChild(newCommentDOMObject(storyJSON._id));
+//   // if (user._id !== undefined)
+//   cardFooter.appendChild(newCommentDOMObject(storyJSON._id));
 
-  return card;
-}
+//   return card;
+// }
 
 function renderPaperData(paper) {
   if (paper.fileName !== undefined)
