@@ -41,7 +41,8 @@ function paperDOMObject(paperJSON) {
 
   commentContentSpan = document.createElement("span");
   commentContentSpan.className = "comment-content";
-  commentContentSpan.innerHTML = " | submitted at " + paperJSON.date;
+  const d = new Date(paperJSON.date);
+  commentContentSpan.innerHTML = " | submitted at " + d.toLocaleDateString();
   commentDiv.appendChild(commentContentSpan);
 
   return commentDiv;

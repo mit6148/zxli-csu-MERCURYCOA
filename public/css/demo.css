@@ -60,10 +60,12 @@ a {
 .main {
   width: 1000px;
   height: 700px;
+  /* height: 500px; */
   overflow: hidden;
   margin: 0 auto;
   position: relative;
 }
+
 .container > header {
   margin: 10px;
   padding: 20px 10px 10px 10px;
@@ -129,7 +131,7 @@ a {
   line-height: 30px;
   padding: 5px 0px;
 }
-.codrops-demos button {
+.codrops-demos a {
   display: inline-block;
   margin: 0px 4px;
   padding: 0px 6px;
@@ -180,15 +182,15 @@ a {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
-.codrops-demos button:hover {
+.codrops-demos a:hover {
   color: #333;
   background: #fff;
 }
-.codrops-demos button:active {
+.codrops-demos a:active {
   background: #fff;
 }
-.codrops-demos button.current-demo,
-.codrops-demos button.current-demo:hover {
+.codrops-demos a.current-demo,
+.codrops-demos a.current-demo:hover {
   background: #f0f0f0;
   border-color: #d9d9d9;
   color: #aaa;

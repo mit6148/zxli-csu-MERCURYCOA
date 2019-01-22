@@ -81,14 +81,15 @@
         <h1><span>Public Peer Review Platform</span></h1>
         <!-- <h1><span>Public </span> peer review Platform &amp; collaboration</h1> -->
         <h2>Fun with skeuomorphism &amp; CSS3 rotations</h2>
-        
 
         <nav class="codrops-demos">
           <!-- <a href="/newest_paper">Newest Papers</a> -->
-          <button onclick="myFunction3()">All Papers</button>
+          <!-- <button onclick="myFunction3()">All Papers</button>
           <button onclick="myFunction1()">Newest Papers</button>
-          <button onclick="myFunction2()">Most Popular Papers</button>
-          <!-- <a href="/newest_paper">Most Popular Papers</a> -->
+          <button onclick="myFunction2()">Most Popular Papers</button> -->
+          <a class="current-demo" href="#all-papers">All Papers</a>
+          <a class="current-demo" href="#new-papers">Newest Papers</a>
+          <a class="current-demo" href="#pop-papers">Most Popular Papers</a>
           <!-- <a class="current-demo" href="index3.html">Demo 3</a>
           <a href="index4.html">Demo 4</a> <a href="index5.html">Demo 5</a> -->
         </nav>
@@ -106,149 +107,131 @@
           <span class="note-ie">Sorry, only modern browsers.</span>
         </div>
       </header>
-      <div class="row">
-            <div class="col-12">
-                    <section class="main">
-                        <div id="sb-container" class="sb-container">
-                        <div>
-                            <span class="sb-icon icon-physics"></span>
-        
-                            <h4><span>Physics</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-chemistry"></span>
-                            <h4><span>Chemistry</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-math"></span>
-                            <h4><span>Math</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-econ"></span>
-                            <h4><span>Economics</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-globe"></span>
-                            <h4><span>Biology</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-econ"></span>
-                            <h4><span>EECS</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-social"></span>
-                            <h4><span>Social Science</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-globe"></span>
-                            <h4><span>Astronomy</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-business"></span>
-                            <h4><span>Business & Management</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-globe"></span>
-                            <h4><span>Energy and Earth Science</span></h4>
-                        </div>
-                        <div>
-                            <span class="sb-icon icon-art"></span>
-                            <h4><span>Art & Culture</span></h4>
-                        </div>
-                        <div>
-                            <h4><span>Click to start</span></h4>
-                            <span class="sb-toggle">Click to open/close</span>
-                            <h5><span>Subjects</span></h5>
-                            <!-- <h5><span>We &hearts;Subjects</span></h5> -->
-                        </div>
-                        </div>
-                        <!-- sb-container -->
-                    </section>
-                    </div>
-
         <div class="col-12">
-            <h4>Newest Papers</h4>
-            <br />
+          <a name="all-papers"></a>
+          <section class="main">
+            <div id="sb-container" class="sb-container">
+              <div>
+                <span class="sb-icon icon-physics"></span>
 
-            <!-- <div class="card bg-dark"> -->
+                <h4><a href='#physics'> Physics</a></h4>
+                <!-- <h4><span>Physics</span></h4> -->
+              </div>
+              <div>
+                <span class="sb-icon icon-chemistry"></span>
+                <h4><span>Chemistry</span></h4>
+              </div>
+              <div>
+                <span class="sb-icon icon-math"></span>
+                <h4><span>Math</span></h4>
+              </div>
+              <div>
+                <span class="sb-icon icon-econ"></span>
+                <h4><span>Economics</span></h4>
+              </div>
+              <div>
+                <span class="sb-icon icon-globe"></span>
+                <h4><span>Biology</span></h4>
+              </div>
+              <div>
+                <span class="sb-icon icon-econ"></span>
+                <h4><span>EECS</span></h4>
+              </div>
+              <div>
+                <span class="sb-icon icon-social"></span>
+                <h4><span>Social Science</span></h4>
+              </div>
+              <div>
+                <span class="sb-icon icon-globe"></span>
+                <h4><span>Astronomy</span></h4>
+              </div>
+              <div>
+                <span class="sb-icon icon-business"></span>
+                <h4><span>Business & Management</span></h4>
+              </div>
+              <div>
+                <span class="sb-icon icon-globe"></span>
+                <h4><span>Energy and Earth Science</span></h4>
+              </div>
+              <div>
+                <span class="sb-icon icon-art"></span>
+                <h4><span>Art & Culture</span></h4>
+              </div>
+              <div>
+                <h4><span>Click to start</span></h4>
+                <span class="sb-toggle">Click to open/close</span>
+                <h5><span>Subjects</span></h5>
+                <!-- <h5><span>We &hearts;Subjects</span></h5> -->
+              </div>
+            </div>
+            <!-- sb-container -->
+          </section>
+        </div>
+        <div class="col-12">
+          <section class="main">
+            <a name="new-papers"></a> <br />
+            <nav class="codrops-demos">
+                <a class="current-demo" href="#all-papers">All Papers</a>
+                <a class="current-demo" href="#new-papers">Newest Papers</a>
+                <a class="current-demo" href="#pop-papers">Most Popular Papers</a>
+            </nav>
+            <h4>Newest Papers</h4>
+            
             <div class="card-body" id="newest-papers">
-                <!-- last post inserted here -->
+              <!-- last post inserted here -->
             </div>
-            </div>
+          </section>
+        </div>
+
         <!-- </div> -->
         <div class="col-12">
+          <section class="main">
+            <a name="pop-papers"></a>
+            <nav class="codrops-demos">
+                    <a class="current-demo" href="#all-papers">All Papers</a>
+                    <a class="current-demo" href="#new-papers">Newest Papers</a>
+                    <a class="current-demo" href="#pop-papers">Most Popular Papers</a>
+                </nav>
             <h4>Most Popular Papers</h4>
+
             <br />
             <!-- <div class="card"> -->
             <div class="card-body" id="popular-paper-card">
-                <!-- last post inserted here -->
+              <!-- last post inserted here -->
             </div>
-            <!-- </div> -->
-        </div>
-        <div class="col-12">
-            <section class="main">
-                <div id="sb-container" class="sb-container">
-                <div>
-                    <span class="sb-icon icon-physics"></span>
+          </section>
 
-                    <h4><span>Physics</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-chemistry"></span>
-                    <h4><span>Chemistry</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-math"></span>
-                    <h4><span>Math</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-econ"></span>
-                    <h4><span>Economics</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-globe"></span>
-                    <h4><span>Biology</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-econ"></span>
-                    <h4><span>EECS</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-social"></span>
-                    <h4><span>Social Science</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-globe"></span>
-                    <h4><span>Astronomy</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-business"></span>
-                    <h4><span>Business & Management</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-globe"></span>
-                    <h4><span>Energy and Earth Science</span></h4>
-                </div>
-                <div>
-                    <span class="sb-icon icon-art"></span>
-                    <h4><span>Art & Culture</span></h4>
-                </div>
-                <div>
-                    <h4><span>Click to start</span></h4>
-                    <span class="sb-toggle">Click to open/close</span>
-                    <h5><span>Subjects</span></h5>
-                    <!-- <h5><span>We &hearts;Subjects</span></h5> -->
-                </div>
-                </div>
-                <!-- sb-container -->
-            </section>
-            </div>
+          <!-- </div> -->
         </div>
+
+        <div class="col-4">
+                <h4>Subjects</h4>
+                <br />
+                <div class="card">
+                  <a name='physics'>Physics</a>
+                  <div class="card-body" id="physics-card">
+      
+                  </div>
+                  <h5>Chemistry</h5>
+                  <div class="card-body" id="chemistry-card">
+      
+                  </div>
+                  <h5>Mathematics</h5>
+                  <div class="card-body" id="math-card">
+      
+                  </div>
+                  <h5>Economics</h5>
+                  <div class="card-body" id="econ-card">
+      
+                  </div>
+                </div>
+              </div>
+      </div>
     </div>
     <script src="/static/js/api.js"></script>
     <script src="/static/js/navbar.js"></script>
     <script src="/static/js/home.js"></script>
-    
+
     <script
       type="text/javascript"
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
@@ -273,48 +256,6 @@
         });
       });
     </script>
-    <script>
-            function myFunction1() {
-              var x = document.getElementById("newest-papers");
-              var y = document.getElementById("popular-paper-card");
-              var sb = document.getElementById("sb-container");
-              if (x.style.display === "none") {
-                x.style.display = "block";
-              } else {
-                x.style.display = "none";
-              }
-
-              if (y.style.display === "none" || x.style.display === 'none') {
-                sb.style.display = "block";
-              } else {
-                sb.style.display = "none";
-              }
-            }
-            function myFunction2() {
-              var y = document.getElementById("popular-paper-card");
-              var sb = document.getElementById("sb-container");
-              if (y.style.display === "none") {
-                y.style.display = "block";
-              } else {
-                y.style.display = "none";
-              }
-
-              if (y.style.display === "none" || x.style.display === 'none') {
-                sb.style.display = "block";
-              } else {
-                sb.style.display = "none";
-              }
-            }
-            function myFunction3() {
-              var x = document.getElementById("newest-papers");
-              var y = document.getElementById("popular-paper-card");
-              var sb = document.getElementById("sb-container");
-              if (y.style.display === "none" || x.style.display === 'none') {
-                sb.style.display = "block";
-              } else {
-                sb.style.display = "none";
-              }
-            }
-            </script>
+    
   </body>
 </html>
