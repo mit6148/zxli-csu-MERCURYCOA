@@ -8,10 +8,12 @@ const Story = require("../models/story");
 const Comment = require("../models/comment");
 const User = require("../models/user");
 const Paper = require("../models/paper");
+const Version = require("../models/version");
 const CommentPaper = require("../models/commentpaper");
 const ObjectId = require("mongoose").Types.ObjectId;
 const router = express.Router();
 const path = require("path");
+const filenamify = require("filenamify");
 
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -20,7 +22,12 @@ var storage = multer.diskStorage({
   },
   filename: function(req, file, cb) {
     // cb(null, file.originalname + "-" + Date.now() + ".pdf");
-    cb(null, Date.now() + "-" + file.originalname);
+    cb(
+      null,
+      Date.now() +
+        "-" +
+        filenamify(file.originalname).replace(/(?!\.[^.]+$)\.|[^\w.]+/g, "")
+    );
   }
   // filename: function(req, file, cb) {
   //   cb(null, file.originalname);
@@ -113,7 +120,7 @@ router.get("/user_comments", function(req, res) {
     papers
   ) {
     console.log(papers);
-    console.log("ddddd");
+    console.log("hhhh");
     console.log(err);
     res.send(papers);
   });
@@ -121,11 +128,11 @@ router.get("/user_comments", function(req, res) {
 // SampleModel.find( { dates : { $elemMatch: {  date : { $gte: 'DATE_VALUE' } } } } )
 //SampleModel.find( { 'dates.date': { $gte: 'DATE_VALUE' } } )
 
-router.get("/mypaper", function(req, res) {
-  Paper.find({ parent: req.query.parent }, function(err, papers) {
-    res.send(papers);
-  });
-});
+// router.get("/mypaper", function(req, res) {
+//   Paper.find({ parent: req.query.parent }, function(err, papers) {
+//     res.send(papers);
+//   });
+// });
 
 router.get("/allpaper", function(req, res) {
   Paper.find({}, function(err, papers) {
@@ -234,6 +241,13 @@ router.get("/upload_paper_form", connect.ensureLoggedIn(), function(req, res) {
   res.sendFile("upload_paper.html", { root: "src/views" });
 });
 
+router.get("/upload_version_form", connect.ensureLoggedIn(), function(
+  req,
+  res
+) {
+  res.sendFile("upload_version.html", { root: "src/views" });
+});
+
 router.get("/upload_comment_form", connect.ensureLoggedIn(), function(
   req,
   res
@@ -305,15 +319,10 @@ router.post(
           author: req.body.author,
           abstract: req.body.abstract,
           subject: req.body.subject,
-          // type: req.body.type,
-          user_parent: req.body.user_parent,
-          // paper_parent: req.body.parent_parent
+          paper_parent_fileName: req.file.filename,
           paperName: req.file.originalname,
 
           papernumber: `P-${num_papers + 1} - V ${num_version + 1}`
-          // papernumber: {
-          //   type: paper ? `P-${num_papers + 1}` : `C-${num_papers + 1}`
-          // }
         });
         product
           .save()
@@ -372,9 +381,8 @@ router.post(
         user: req.user._id,
         title: req.body.title,
         author: req.body.author,
-
-        user_parent: req.body.user_parent,
-        paper_parent: req.body.parent_parent,
+        paper_parent_fileName: req.file.fileName,
+        // paper_parent_fileName: req.query.fileName,
 
         papernumber: `C-${num_papers + 1}`
         // papernumber: {
@@ -422,22 +430,91 @@ router.post(
   }
 );
 
+router.post(
+  "/uploadNewVersion",
+  connect.ensureLoggedIn(),
+  upload.single("photo"),
+  function(req, res, next) {
+    console.log("no problem");
+    console.log("file data", req.file);
+    if (req.file == undefined) {
+      return res
+        .status(422)
+        .send({ error: "You must select a file to upload." });
+    }
+    //console.log(req.body.author)
+    Version.find({}, function(err, papers) {
+      console.log("hello");
+
+      const newVersion = new Version({
+        _id: new mongoose.Types.ObjectId(),
+        // uploader: req.body.uploader,
+        // uploader: "Ajay",
+        filePath: req.file.path,
+        fileName: req.file.filename,
+        commentPaperName: req.file.originalname,
+
+        user: req.user._id,
+        version: req.body.version,
+        title: req.body.title,
+        author: req.body.author,
+
+        // user_parent: req.body.user_parent,
+        paper_parent_fileName: req.query.fileName
+
+        // papernumber: `C-${num_papers + 1}`
+        // papernumber: {
+        //   type: paper ? `P-${num_papers + 1}` : `C-${num_papers + 1}`
+        // }
+      });
+      newVersion
+        .save()
+        .then(result => {
+          console.log("save");
+          Version.find({}).exec(function(err, files) {
+            if (files) {
+              res.status(201).json({
+                message: "File uploaded successfully",
+                allFilesDetail: files
+              });
+              console.log(req.params.fileName);
+              console.log("^happy");
+
+              Paper.findOneAndUpdate(
+                { fileName: req.params.fileName },
+                // { fileName: "100solutions.pdf-1547920220413.pdf" },
+                // { fileName: req.query.fileName },
+                { $push: { versions: newVersion.fileName } },
+                { new: true }
+              ).then(function(paper) {
+                console.log(paper);
+                console.log("happyy");
+              });
+            } else {
+              res.status(204).json({
+                message: "No file detail exist",
+                allFilesDetail: files
+              });
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({
+            error: err
+          });
+        });
+    });
+  }
+);
+
 // router.post("/uploadFile", upload.single("photo"), function(req, res, next) {
-//   console.log("no problem");
-//   console.log("file data", req.file);
 //   if (req.file == undefined) {
 //     return res.status(422).send({ error: "You must select a file to upload." });
 //   }
-//   //console.log(req.body.author)
 //   Paper.find({}, function(err, papers) {
-//     console.log("hello");
-//     console.log(papers);
-//     const num_papers = papers.length;
-
 //     const product = new Paper({
 //       _id: new mongoose.Types.ObjectId(),
-//       // uploader: req.body.uploader,
-//       // uploader: "Ajay",
 //       filePath: req.file.path,
 //       // fileName: req.file.originalname,
 //       fileName: req.file.filename,
@@ -458,7 +535,6 @@ router.post(
 //     product
 //       .save()
 //       .then(result => {
-//         console.log("save");
 //         Paper.find({}).exec(function(err, files) {
 //           if (files) {
 //             res.status(201).json({

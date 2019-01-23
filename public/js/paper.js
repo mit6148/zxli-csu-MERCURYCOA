@@ -8,12 +8,6 @@ function main() {
     url_string.lastIndexOf("/") + 1,
     url_string.length
   );
-  console.log(fileName);
-  console.log("^filename");
-
-  //   get("/api/user", { id: profileId }, function(profileUser) {
-  //     renderUserData(profileUser);
-  //   });
 
   get("/api/onepaper", { fileName: fileName }, function(paper) {
     renderPaperData(paper);
@@ -34,6 +28,7 @@ function newPaperDOMObject() {
     url_string.lastIndexOf("/") + 1,
     url_string.length
   );
+
   const newStoryDiv = document.createElement("div");
   newStoryDiv.className = "input-group my-3";
 
@@ -47,8 +42,21 @@ function newPaperDOMObject() {
   newStorySubmit.addEventListener("click", () => {
     window.location = "/api/upload_comment_form";
   });
-
   newStoryButtonDiv.appendChild(newStorySubmit);
+
+  const newVersionButtonDiv = document.createElement("div");
+  newVersionButtonDiv.className = "input-group-append";
+  newStoryDiv.appendChild(newVersionButtonDiv);
+
+  const newVersionSubmit = document.createElement("button");
+  newVersionSubmit.innerHTML = "Update Version";
+  newVersionSubmit.className = "btn btn-outline-primary";
+
+  newVersionSubmit.addEventListener("click", () => {
+    window.location = "/api/upload_version_form";
+  });
+
+  newVersionButtonDiv.appendChild(newVersionSubmit);
 
   const DownloadButton = document.createElement("div");
   DownloadButton.className = "input-group-append";
@@ -60,53 +68,25 @@ function newPaperDOMObject() {
   // btnSubmit.setAttribute("href", "/static/pdf/" + fileName);
 
   btnSubmit.setAttribute("href", "/api/downloadpaper?fileName=" + fileName);
-  // titleElement.setAttribute("href", "/api/viewpaper?fileName=" + fileName);
-
-  // btnSubmit.addEventListener("click", () => {
-  //   get("/download/" + fileName, {}, () => {
-  //     console.log("helppp");
-  //   });
-  // });
 
   DownloadButton.appendChild(btnSubmit);
 
+  const newLikeButtonDiv = document.createElement("div");
+  newLikeButtonDiv.className = "input-group-append";
+  newStoryDiv.appendChild(newLikeButtonDiv);
+
+  const newLikeSubmit = document.createElement("button");
+  newLikeSubmit.innerHTML = "&hearts; Like";
+  newLikeSubmit.className = "btn btn-outline-primary";
+
+  newLikeSubmit.addEventListener("click", () => {
+    // likes plus 1
+  });
+
+  newLikeButtonDiv.appendChild(newLikeSubmit);
+
   return newStoryDiv;
 }
-
-// function storyDOMObject(storyJSON, user) {
-//   const card = document.createElement("div");
-//   card.setAttribute("id", storyJSON._id);
-//   card.className = "story card";
-
-//   const cardBody = document.createElement("div");
-//   cardBody.className = "card-body";
-//   card.appendChild(cardBody);
-
-//   const creatorSpan = document.createElement("a");
-//   creatorSpan.className = "story-creator card-title";
-//   creatorSpan.innerHTML = storyJSON.creator_name;
-//   creatorSpan.setAttribute("href", "/u/profile?" + storyJSON.creator_id);
-//   cardBody.appendChild(creatorSpan);
-
-//   const contentSpan = document.createElement("p");
-//   contentSpan.className = "story-content card-text";
-//   contentSpan.innerHTML = storyJSON.content;
-//   cardBody.appendChild(contentSpan);
-
-//   const cardFooter = document.createElement("div");
-//   cardFooter.className = "card-footer";
-//   card.appendChild(cardFooter);
-
-//   const commentsDiv = document.createElement("div");
-//   commentsDiv.setAttribute("id", storyJSON._id + "-comments");
-//   commentsDiv.className = "story-comments";
-//   cardFooter.appendChild(commentsDiv);
-
-//   // if (user._id !== undefined)
-//   cardFooter.appendChild(newCommentDOMObject(storyJSON._id));
-
-//   return card;
-// }
 
 function renderPaperData(paper) {
   if (paper.fileName !== undefined)
@@ -147,8 +127,7 @@ function renderPaperData(paper) {
   versionSpan.className = "story-creator card-title";
   console.log(paper);
   versionSpan.innerHTML = paper.papernumber;
-  // historySpan.setAttribute("href", "/pdf/myprofile.pdf");
-  // historySpan.setAttribute("href", "/u/profile?" + user._id);
+
   version_num.appendChild(versionSpan);
 
   const tag = document.createElement("div");
@@ -163,50 +142,31 @@ function renderPaperData(paper) {
   historySpan.className = "story-creator card-title";
   console.log(paper);
   historySpan.innerHTML = paper.abstract;
-  // historySpan.setAttribute("href", "/pdf/myprofile.pdf");
-  // historySpan.setAttribute("href", "/u/profile?" + user._id);
+
   historyCard.appendChild(historySpan);
 
   const viewsCard = document.getElementById("views-card");
 
   const viewsSpan = document.createElement("a");
   viewsSpan.className = "story-creator card-title";
-  // console.log(paper);
+
   viewsSpan.innerHTML = paper.views;
-  // historySpan.setAttribute("href", "/pdf/myprofile.pdf");
-  // historySpan.setAttribute("href", "/u/profile?" + user._id);
+
   viewsCard.appendChild(viewsSpan);
 
   const downloadCard = document.getElementById("downloads-card");
 
   const downloadSpan = document.createElement("a");
   downloadSpan.className = "story-creator card-title";
-  // console.log(paper);
+
   downloadSpan.innerHTML = paper.downloads;
-  // historySpan.setAttribute("href", "/pdf/myprofile.pdf");
-  // historySpan.setAttribute("href", "/u/profile?" + user._id);
+
   downloadCard.appendChild(downloadSpan);
 
-  // const latestPost = document.createElement("p");
-  // latestPost.className = "story-content card-text";
-  // // latestPost.innerHTML = user.last_post;
-  // historyCard.appendChild(latestPost);
-
-  // var id = url_string.substring(url_string.lastIndexOf("/") + 1, url_string.length)
   const titleElement = document.getElementById("name-container");
 
   titleElement.innerHTML = paper.title;
   titleElement.setAttribute("href", "/api/viewpaper?fileName=" + fileName);
-
-  // const myPaper = document.getElementById("stories");
-  // get("/api/allpaper", { parent: "5c38f4241e4d643add432fbd" }, function(
-  //   papersArr
-  // ) {
-  //   for (let j = 0; j < papersArr.length; j++) {
-  //     const currentPaper = papersArr[j];
-  //     myPaper.appendChild(currentPaper);
-  //   }
-  // });
 }
 
 main();

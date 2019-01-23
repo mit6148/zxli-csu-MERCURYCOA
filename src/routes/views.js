@@ -11,6 +11,10 @@ router.get("/newest_paper", function(req, res, next) {
   res.sendFile("home.html", { root: "src/views" });
 });
 
+router.get("/login", function(req, res) {
+  res.redirect("/auth/google");
+});
+
 router.get("/", function(req, res, next) {
   res.sendFile("index3.html", { root: "src/views" });
   // res.sendFile("home.html", { root: "src/views" });

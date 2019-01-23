@@ -12,13 +12,13 @@ function renderNavbar(user) {
 
   navbarDiv.appendChild(newNavbarItem("Home", "/"));
   navbarDiv.appendChild(newNavbarItem("Community", "/feed"));
+  navbarDiv.appendChild(
+    newNavbarItem("Submit Paper", "/api/upload_paper_form")
+  );
 
   if (user._id !== undefined) {
     navbarDiv.appendChild(newNavbarItem("Dashboard", "/u/profile?" + user._id));
     navbarDiv.appendChild(newNavbarItem("Logout", "/logout"));
-    navbarDiv.appendChild(
-      newNavbarItem("Submit Paper", "/api/upload_paper_form")
-    );
   } else {
     navbarDiv.appendChild(newNavbarItem("Login", "/auth/google"));
   }
