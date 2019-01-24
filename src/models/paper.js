@@ -31,11 +31,12 @@ const PaperModelSchema = new mongoose.Schema({
   papernumber: { type: String, required: false },
   filePath: { type: String, required: false },
   fileName: { type: String, required: false },
-  paper_parent_fileName: { type: String, required: false },
+  paper_parent: { type: String, required: false },
   date: {
     type: Date,
     default: Date.now
   }
+
   // file name for version
   // fileVerName: { type: String, required: false }
 });

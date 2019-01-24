@@ -65,8 +65,16 @@ router.get("/user", function(req, res) {
 router.get("/onepaper", function(req, res) {
   console.log(req.query.fileName);
   Paper.findOne({ fileName: req.query.fileName }, function(err, paper) {
-    console.log(paper);
-    res.send(paper);
+    if (paper) {
+      res.send(paper);
+    } else {
+      CommentPaper.findOne({ fileName: req.query.fileName }, function(
+        err,
+        paper
+      ) {
+        res.send(paper);
+      });
+    }
   });
 });
 
@@ -248,7 +256,7 @@ router.get("/upload_version_form", connect.ensureLoggedIn(), function(
   res.sendFile("upload_version.html", { root: "src/views" });
 });
 
-router.get("/upload_comment_form", connect.ensureLoggedIn(), function(
+router.get("/upload_comment_form/:fileName", connect.ensureLoggedIn(), function(
   req,
   res
 ) {
@@ -260,6 +268,7 @@ router.get("/pdf_embed", connect.ensureLoggedIn(), function(req, res) {
 
 router.get("/viewpaper", function(req, res) {
   // res.sendFile("upload.html", { root: "src/views" });
+  console.log(req.user);
   Paper.findOneAndUpdate(
     { fileName: req.query.fileName },
     { $inc: { views: 1 } },
@@ -279,7 +288,8 @@ router.get("/downloadpaper", function(req, res) {
       console.log("download update");
     }
   );
-  res.redirect("/static/pdf/" + req.query.fileName);
+  res.download("./public/pdf/" + req.query.fileName);
+  // res.redirect("/static/pdf/" + req.query.fileName);
 });
 
 router.post(
@@ -360,6 +370,7 @@ router.post(
   function(req, res, next) {
     console.log("no problem");
     console.log("file data", req.file);
+    console.log(req.body);
     if (req.file == undefined) {
       return res
         .status(422)
@@ -371,7 +382,7 @@ router.post(
       const num_papers = papers.length;
 
       const newComment = new CommentPaper({
-        _id: new mongoose.Types.ObjectId(),
+        // _id: new mongoose.Types.ObjectId(),
         // uploader: req.body.uploader,
         // uploader: "Ajay",
         filePath: req.file.path,
@@ -381,7 +392,7 @@ router.post(
         user: req.user._id,
         title: req.body.title,
         author: req.body.author,
-        paper_parent_fileName: req.file.fileName,
+        paper_parent: req.body.paper_parent,
         // paper_parent_fileName: req.query.fileName,
 
         papernumber: `C-${num_papers + 1}`
@@ -394,16 +405,19 @@ router.post(
         .then(result => {
           console.log("save");
           CommentPaper.find({}).exec(function(err, files) {
+            console.log(err);
+            console.log("find{} err^");
             if (files) {
-              res.status(201).json({
-                message: "File uploaded successfully",
-                allFilesDetail: files
-              });
-              console.log(req.params.fileName);
-              console.log("^happy");
+              // res.status(201).json({
+              //   message: "File uploaded successfully",
+              //   allFilesDetail: files
+              // });
+              // console.log(req.body.paper_parent);
+              // console.log("^happy");
+              res.redirect("/api/upload_comment_form/" + req.body.paper_parent);
 
               Paper.findOneAndUpdate(
-                { fileName: req.params.fileName },
+                { fileName: req.body.paper_parent },
                 // { fileName: "100solutions.pdf-1547920220413.pdf" },
                 // { fileName: req.query.fileName },
                 { $push: { comments: newComment.fileName } },

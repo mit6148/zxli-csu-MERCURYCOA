@@ -40,7 +40,7 @@ function newPaperDOMObject() {
   newStorySubmit.innerHTML = "Submit Comment";
   newStorySubmit.className = "btn btn-outline-primary";
   newStorySubmit.addEventListener("click", () => {
-    window.location = "/api/upload_comment_form";
+    window.location = "/api/upload_comment_form/" + fileName;
   });
   newStoryButtonDiv.appendChild(newStorySubmit);
 
