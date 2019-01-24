@@ -13,12 +13,12 @@ const PaperModelSchema = new mongoose.Schema({
   ],
   versions: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Version"
+      type: String,
+      ref: "Paper"
     }
   ],
   user: { type: Schema.Types.ObjectId, ref: "User" },
-  // paper_parent: { type: String, required: false },
+  paper_parent: { type: String, required: false },
   author: { type: String, required: false },
   title: { type: String, required: false },
   abstract: { type: String, required: false },

@@ -53,7 +53,7 @@ function newPaperDOMObject() {
   newVersionSubmit.className = "btn btn-outline-primary";
 
   newVersionSubmit.addEventListener("click", () => {
-    window.location = "/api/upload_version_form";
+    window.location = "/api/upload_version_form/" + fileName;
   });
 
   newVersionButtonDiv.appendChild(newVersionSubmit);

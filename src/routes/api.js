@@ -8,7 +8,6 @@ const Story = require("../models/story");
 const Comment = require("../models/comment");
 const User = require("../models/user");
 const Paper = require("../models/paper");
-const Version = require("../models/version");
 const CommentPaper = require("../models/commentpaper");
 const ObjectId = require("mongoose").Types.ObjectId;
 const router = express.Router();
@@ -249,7 +248,7 @@ router.get("/upload_paper_form", connect.ensureLoggedIn(), function(req, res) {
   res.sendFile("upload_paper.html", { root: "src/views" });
 });
 
-router.get("/upload_version_form", connect.ensureLoggedIn(), function(
+router.get("/upload_version_form/:fileName", connect.ensureLoggedIn(), function(
   req,
   res
 ) {
@@ -268,7 +267,6 @@ router.get("/pdf_embed", connect.ensureLoggedIn(), function(req, res) {
 
 router.get("/viewpaper", function(req, res) {
   // res.sendFile("upload.html", { root: "src/views" });
-  console.log(req.user);
   Paper.findOneAndUpdate(
     { fileName: req.query.fileName },
     { $inc: { views: 1 } },
@@ -300,9 +298,10 @@ router.post(
     console.log("no problem");
     console.log("file data", req.file);
     if (req.file == undefined) {
-      return res
-        .status(422)
-        .send({ error: "You must select a file to upload." });
+      // return res
+      //   .status(422)
+      //   .send({ error: "You must select a file to upload." });
+      res.redirect("/api/upload_paper_form");
     }
     //console.log(req.body.author)
     Paper.find({}, function(err, papers) {
@@ -317,7 +316,7 @@ router.post(
         // console.log({paper.length});
         num_version = paper.length;
         const product = new Paper({
-          _id: new mongoose.Types.ObjectId(),
+          // _id: new mongoose.Types.ObjectId(),
           // uploader: req.body.uploader,
           // uploader: "Ajay",
           filePath: req.file.path,
@@ -340,10 +339,11 @@ router.post(
             console.log("save");
             Paper.find({}).exec(function(err, files) {
               if (files) {
-                res.status(201).json({
-                  message: "File uploaded successfully",
-                  allFilesDetail: files
-                });
+                // res.status(201).json({
+                //   message: "File uploaded successfully",
+                //   allFilesDetail: files
+                // });
+                res.redirect("/api/upload_paper_form");
               } else {
                 res.status(204).json({
                   message: "No file detail exist",
@@ -378,7 +378,6 @@ router.post(
     }
     //console.log(req.body.author)
     CommentPaper.find({}, function(err, papers) {
-      console.log("hello");
       const num_papers = papers.length;
 
       const newComment = new CommentPaper({
@@ -457,52 +456,54 @@ router.post(
         .send({ error: "You must select a file to upload." });
     }
     //console.log(req.body.author)
-    Version.find({}, function(err, papers) {
-      console.log("hello");
+    Paper.find({}, function(err, papers) {
+      const newPaper = new Paper({
+        // filePath: req.file.path,
+        // fileName: req.file.filename,
+        // commentPaperName: req.file.originalname,
 
-      const newVersion = new Version({
-        _id: new mongoose.Types.ObjectId(),
-        // uploader: req.body.uploader,
-        // uploader: "Ajay",
+        // user: req.user._id,
+        // version: req.body.version,
+        // title: req.body.title,
+        // author: req.body.author,
         filePath: req.file.path,
         fileName: req.file.filename,
-        commentPaperName: req.file.originalname,
-
         user: req.user._id,
-        version: req.body.version,
         title: req.body.title,
         author: req.body.author,
+        abstract: req.body.abstract,
+        subject: req.body.subject,
 
-        // user_parent: req.body.user_parent,
-        paper_parent_fileName: req.query.fileName
+        // papernumber: `P-${num_papers + 1} - V ${num_version + 1}`,
+
+        paper_parent: req.body.paper_parent
 
         // papernumber: `C-${num_papers + 1}`
         // papernumber: {
         //   type: paper ? `P-${num_papers + 1}` : `C-${num_papers + 1}`
         // }
       });
-      newVersion
+      newPaper
         .save()
         .then(result => {
           console.log("save");
-          Version.find({}).exec(function(err, files) {
+          Paper.find({}).exec(function(err, files) {
             if (files) {
-              res.status(201).json({
-                message: "File uploaded successfully",
-                allFilesDetail: files
-              });
-              console.log(req.params.fileName);
-              console.log("^happy");
+              // res.status(201).json({
+              //   message: "File uploaded successfully",
+              //   allFilesDetail: files
+              // });
+              res.redirect("/api/upload_version_form/" + req.body.paper_parent);
 
               Paper.findOneAndUpdate(
-                { fileName: req.params.fileName },
+                { fileName: req.body.paper_parent },
                 // { fileName: "100solutions.pdf-1547920220413.pdf" },
                 // { fileName: req.query.fileName },
-                { $push: { versions: newVersion.fileName } },
+                { $push: { versions: newPaper.fileName } },
                 { new: true }
               ).then(function(paper) {
-                console.log(paper);
-                console.log("happyy");
+                // console.log(paper);
+                // console.log("happyy");
               });
             } else {
               res.status(204).json({
