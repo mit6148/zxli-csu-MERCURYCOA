@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 // Example URI ---> mongodb+srv://weblab:6jYctMizX5Y5ie6W@catbook-fsjig.mongodb.net/catbookdb?retryWrites=true
 // const mongoURL =
 //   "mongodb+srv://mercury:19911022@cluster0-glvuc.mongodb.net/test?retryWrites=true";
-const mongoURL = "mongodb://localhost:27017/myproject";
+// const mongoURL = "mongodb://localhost:27017/myproject";
+const mongoURL = process.env.ATLAS_SRA;
 
 const options = {
   useNewUrlParser: true
