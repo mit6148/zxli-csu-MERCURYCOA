@@ -17,6 +17,25 @@ function main() {
     renderNavbar(user);
   });
 }
+function makeUL(array) {
+  // Create the list element:
+  var list = document.createElement("ul");
+
+  for (var i = 0; i < array.length; i++) {
+    // Create the list item:
+    var item = document.createElement("li");
+    var anchor = document.createElement("a");
+    anchor.appendChild(document.createTextNode(array[i]));
+    item.appendChild(anchor);
+    // Set its contents:
+
+    // Add it to the list:
+    list.appendChild(item);
+  }
+
+  // Finally, return the constructed list:
+  return list;
+}
 function newPaperDOMObject() {
   //set up pdf link
 
@@ -109,16 +128,36 @@ function renderPaperData(paper) {
 
   const comment = document.getElementById("comment-card");
 
-  const commentSpan = document.createElement("a");
-  commentSpan.className = "comment-creator card-title";
-  commentSpan.innerHTML = paper.abstract;
-  // commentSpan.setAttribute("href", "/u/profile?" + user._id);
-  comment.appendChild(commentSpan);
+  // comment.appendChild(makeUl(paper.comments));
+  var ul = document.createElement("ul");
 
-  const commentItem = document.createElement("p");
-  commentItem.className = "story-content card-text";
-  // commentItem.innerHTML = user.last_post;
-  comment.appendChild(commentItem);
+  for (var i = 0; i < paper.comments.length; i++) {
+    var li = document.createElement("li");
+    var anchor = document.createElement("a");
+    anchor.className = "comment-creator card-title";
+    anchor.innerHTML = paper.comments[i];
+
+    anchor.setAttribute("href", "/api/viewpaper?fileName=" + paper.comments[i]);
+    li.appendChild(anchor);
+    ul.appendChild(li);
+  }
+  comment.appendChild(ul);
+
+  const version = document.getElementById("version-card");
+
+  var ul = document.createElement("ul");
+
+  for (var i = paper.versions.length; i > 0; i--) {
+    var li = document.createElement("li");
+    var anchor = document.createElement("a");
+    anchor.className = "version card-title";
+    anchor.innerHTML = `version${i} : ` + paper.versions[i];
+
+    anchor.setAttribute("href", "/api/viewpaper?fileName=" + paper.versions[i]);
+    li.appendChild(anchor);
+    ul.appendChild(li);
+  }
+  version.appendChild(ul);
 
   // rendering description
 
