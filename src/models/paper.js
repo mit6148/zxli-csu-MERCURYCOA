@@ -18,7 +18,6 @@ const PaperModelSchema = new mongoose.Schema({
     }
   ],
   user: { type: Schema.Types.ObjectId, ref: "User" },
-  paper_parent: { type: String, required: false },
   author: { type: String, required: false },
   title: { type: String, required: false },
   abstract: { type: String, required: false },
@@ -32,6 +31,7 @@ const PaperModelSchema = new mongoose.Schema({
   filePath: { type: String, required: false },
   fileName: { type: String, required: false },
   paper_parent: { type: String, required: false },
+  paper_root_parent: { type: String, required: false },
   date: {
     type: Date,
     default: Date.now

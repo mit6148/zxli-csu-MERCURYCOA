@@ -327,7 +327,8 @@ router.post(
           author: req.body.author,
           abstract: req.body.abstract,
           subject: req.body.subject,
-          paper_parent_fileName: req.file.filename,
+          paper_parent: req.file.filename,
+          paper_root_parent: req.file.filename,
           paperName: req.file.originalname,
 
           papernumber: `P-${num_papers + 1} - V ${num_version + 1}`
@@ -442,6 +443,8 @@ router.post(
   }
 );
 
+//getTopLevelParent(paperid) { paper.find()}
+
 router.post(
   "/uploadNewVersion",
   connect.ensureLoggedIn(),
@@ -454,17 +457,13 @@ router.post(
         .status(422)
         .send({ error: "You must select a file to upload." });
     }
-    //console.log(req.body.author)
-    Paper.find({}, function(err, papers) {
-      const newPaper = new Paper({
-        // filePath: req.file.path,
-        // fileName: req.file.filename,
-        // commentPaperName: req.file.originalname,
 
-        // user: req.user._id,
-        // version: req.body.version,
-        // title: req.body.title,
-        // author: req.body.author,
+    //console.log(req.body.author)
+    Paper.findOne({ fileName: req.body.paper_parent }, function(
+      err,
+      parentPaper
+    ) {
+      const newPaper = new Paper({
         filePath: req.file.path,
         fileName: req.file.filename,
         user: req.user._id,
@@ -475,7 +474,8 @@ router.post(
 
         // papernumber: `P-${num_papers + 1} - V ${num_version + 1}`,
 
-        paper_parent: req.body.paper_parent
+        paper_parent: req.body.paper_parent,
+        paper_root_parent: parentPaper.paper_root_parent
 
         // papernumber: `C-${num_papers + 1}`
         // papernumber: {
@@ -493,17 +493,6 @@ router.post(
               //   allFilesDetail: files
               // });
               res.redirect("/api/upload_version_form/" + req.body.paper_parent);
-
-              Paper.findOneAndUpdate(
-                { fileName: req.body.paper_parent },
-                // { fileName: "100solutions.pdf-1547920220413.pdf" },
-                // { fileName: req.query.fileName },
-                { $push: { versions: newPaper.fileName } },
-                { new: true }
-              ).then(function(paper) {
-                // console.log(paper);
-                // console.log("happyy");
-              });
             } else {
               res.status(204).json({
                 message: "No file detail exist",
