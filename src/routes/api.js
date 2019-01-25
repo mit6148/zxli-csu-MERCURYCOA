@@ -308,12 +308,18 @@ router.post(
       const num_papers = papers.length;
       //const num_version ：query this user paperName 相同的有几个
       let num_version = 0;
-      Paper.find({ user: req.user._id, title: req.body.title }, function(
-        err,
-        paper
-      ) {
-        // console.log({paper.length});
-        num_version = paper.length;
+      Paper.find({}, function(err, paper) {
+        let paper_num = 0;
+
+        for (p of paper) {
+          if (p.paper_root_parent == p.fileName) {
+            paper_num++;
+          }
+        }
+        console.log(paper_num);
+
+        //console.log(err);
+        //console.log(paper.length);
         const product = new Paper({
           // _id: new mongoose.Types.ObjectId(),
           // uploader: req.body.uploader,
@@ -331,7 +337,7 @@ router.post(
           paper_root_parent: req.file.filename,
           paperName: req.file.originalname,
 
-          papernumber: `P-${num_papers + 1} - V ${num_version + 1}`
+          papernumber: `P-${paper_num + 1} - V1`
         });
         product
           .save()
@@ -457,12 +463,16 @@ router.post(
         .status(422)
         .send({ error: "You must select a file to upload." });
     }
-
     //console.log(req.body.author)
     Paper.findOne({ fileName: req.body.paper_parent }, function(
       err,
       parentPaper
     ) {
+      console.log(parentPaper);
+      let version_num = parentPaper.papernumber.split("V");
+      version_num[1] = parseInt(version_num[1]) + 1;
+      version_num = version_num.join("V");
+      console.log(version_num);
       const newPaper = new Paper({
         filePath: req.file.path,
         fileName: req.file.filename,
@@ -472,7 +482,7 @@ router.post(
         abstract: req.body.abstract,
         subject: req.body.subject,
 
-        // papernumber: `P-${num_papers + 1} - V ${num_version + 1}`,
+        papernumber: version_num,
 
         paper_parent: req.body.paper_parent,
         paper_root_parent: parentPaper.paper_root_parent
@@ -493,6 +503,16 @@ router.post(
               //   allFilesDetail: files
               // });
               res.redirect("/api/upload_version_form/" + req.body.paper_parent);
+              Paper.findOneAndUpdate(
+                { fileName: parentPaper.paper_root_parent },
+                // { fileName: "100solutions.pdf-1547920220413.pdf" },
+                // { fileName: req.query.fileName },
+                { $push: { versions: newPaper.fileName } },
+                { new: true }
+              ).then(function(paper) {
+                console.log(paper);
+                console.log("happyy");
+              });
             } else {
               res.status(204).json({
                 message: "No file detail exist",

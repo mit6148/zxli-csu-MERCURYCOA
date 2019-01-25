@@ -10,7 +10,7 @@ const CommentPaperModelSchema = new mongoose.Schema({
   views: Number,
   downloads: Number,
   paper_parent: { type: String, required: false },
-  // parent_paper_id: String,
+  papernumber: { type: String, required: false },
   commentnumber: String,
   filePath: { type: String, required: false },
   fileName: { type: String, required: false },
