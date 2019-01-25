@@ -12,7 +12,6 @@ const CommentPaper = require("../models/commentpaper");
 const ObjectId = require("mongoose").Types.ObjectId;
 const router = express.Router();
 const path = require("path");
-const filenamify = require("filenamify");
 
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -25,7 +24,7 @@ var storage = multer.diskStorage({
       null,
       Date.now() +
         "-" +
-        filenamify(file.originalname).replace(/(?!\.[^.]+$)\.|[^\w.]+/g, "")
+        file.originalname.replace(/(?!\.[^.]+$)\.|[^\w.]+/g, "")
     );
   }
   // filename: function(req, file, cb) {

@@ -3,7 +3,7 @@ const http = require("http");
 const bodyParser = require("body-parser");
 const express = require("express");
 const session = require("express-session");
-
+require("dotenv").config();
 // local dependencies
 const db = require("./db");
 const passport = require("./passport");
@@ -71,7 +71,7 @@ app.use(function(err, req, res, next) {
 });
 
 // port config
-const port = process.env.port || 3000; // config variable
+const port = process.env.PORT || 3000; // config variable
 const server = http.Server(app);
 server.listen(port, function() {
   console.log("Server running on port: " + port);
