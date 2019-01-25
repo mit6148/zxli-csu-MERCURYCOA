@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,600");
 
 body {
-  font-family: "Open Sans", sans-serif;
+  /* font-family: "Open Sans", sans-serif; */
+  font-family: Ubuntu-Bold;
+  src: url("../fonts/ubuntu/Ubuntu-Bold.ttf");
   font-weight: 300;
 }
 
@@ -56,6 +58,7 @@ div.circle-avatar {
 .large-profile-container {
   padding: 0 35%;
 }
+
 /* CSS for responsive iframe */
 /* ========================= */
 

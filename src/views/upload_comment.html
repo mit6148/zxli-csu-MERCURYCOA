@@ -1,9 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Home Page</title>
+    <title>Upload Comment Page</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link rel="icon" type="image/png" href="/static/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/vendor/animate/animate.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/vendor/css-hamburgers/hamburgers.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/vendor/animsition/css/animsition.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/vendor/select2/select2.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/vendor/daterangepicker/daterangepicker.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/css/util.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/form.css" />
   </head>
   <body>
     <link
@@ -19,36 +66,134 @@
         <!-- navbar items are inserted here -->
       </div>
     </nav>
-    <div class="container text-center" id="profile-container">
-      <form
-        action="/api/uploadCommentPaper"
-        enctype="multipart/form-data"
-        method="POST"
-      >
-        <div>
-          <label for="name">Title:</label>
-          <input type="text" id="title" name="title" />
-        </div>
 
-        <div>
-          <label for="author">Author:</label>
-          <input type="text" id="author" name="author" />
-        </div>
+    <div class="container-contact100" id="profile-container">
+      <div class="wrap-contact100">
+        <form
+          class="contact100-form validate-form"
+          action="/api/uploadCommentPaper"
+          enctype="multipart/form-data"
+          method="POST"
+          novalidate
+        >
+          <span class="contact100-form-title"> Submit A Comment ! </span>
 
-        <div>
-          <label for="paper_parent">Parent_Paper:</label>
-          <input type="text" id="paper_parent" name="paper_parent" />
-        </div>
-        <div>
-          <!-- <label for="paper_number">PaperNumber:</label>
-          <input type="text" id="paper_number" name="paper_number" />
-        </div> -->
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Please enter paper title"
+          >
+            <!-- <label for="name">Title:</label> -->
+            <input
+              class="input100"
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title"
+            />
+            <span class="focus-input100"></span>
+          </div>
 
-        <input type="file" name="photo" />
-        <input type="submit" value="Upload" />
-      </form>
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Please enter authors"
+          >
+            <!-- <label for="author">Author(s):</label> -->
+            <input
+              class="input100"
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Author"
+            />
+            <span class="focus-input100"></span>
+          </div>
+          <div>
+            <label for="paper_parent">Comment on :</label>
+            <input
+              class="input100"
+              type="text"
+              id="paper_parent"
+              name="paper_parent"
+              disabled
+            />
+          </div>
+
+          <br />
+          <!-- <div class="container-contact100-form-btn">
+            <input type="file" name="photo" />
+          </div> -->
+
+          <div class="row">
+            <div class="col-6">
+              <div class="input-file-container">
+                <input
+                  class="input-file"
+                  id="my-file"
+                  type="file"
+                  name="photo"
+                />
+                <label tabindex="0" for="my-file" class="input-file-trigger"
+                  >SELECT A FILE</label
+                >
+              </div>
+              <p class="file-return"></p>
+            </div>
+
+            <div class="col-6">
+              <div class="container-contact100-form-btn">
+                <button
+                  class="contact100-form-btn"
+                  aria-hidden="true"
+                  type="submit"
+                  value="Upload"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- <input type="submit" name="Upload" /> -->
+          <br />
+        </form>
+      </div>
     </div>
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/bootstrap/js/popper.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/static/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/js/form.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-23581568-13");
+    </script>
   </body>
+
   <script src="/static/js/api.js"></script>
   <script src="/static/js/navbar.js"></script>
   <script src="/static/js/upload.js"></script>

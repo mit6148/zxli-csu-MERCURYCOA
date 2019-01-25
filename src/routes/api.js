@@ -265,16 +265,26 @@ router.get("/pdf_embed", connect.ensureLoggedIn(), function(req, res) {
 });
 
 router.get("/viewpaper", function(req, res) {
-  // res.sendFile("upload.html", { root: "src/views" });
   Paper.findOneAndUpdate(
     { fileName: req.query.fileName },
     { $inc: { views: 1 } },
-    function(paper) {
+    function() {
       console.log("view update");
     }
   );
   res.redirect("/static/pdf/" + req.query.fileName);
 });
+
+// router.post("/likes/:fileName", function(req, res) {
+//   Paper.findOneAndUpdate(
+//     { fileName: req.query.fileName },
+//     { $inc: { likes: 1 } },
+//     function() {
+//       console.log("likes update");
+//     }
+//   );
+//   res.redirect("/static/pdf/" + req.query.fileName);
+// });
 
 router.get("/downloadpaper", function(req, res) {
   // res.sendFile("upload.html", { root: "src/views" });
@@ -306,8 +316,6 @@ router.post(
     Paper.find({}, function(err, papers) {
       console.log("hello");
       const num_papers = papers.length;
-      //const num_version ：query this user paperName 相同的有几个
-      let num_version = 0;
       Paper.find({}, function(err, paper) {
         let paper_num = 0;
 
@@ -321,17 +329,13 @@ router.post(
         //console.log(err);
         //console.log(paper.length);
         const product = new Paper({
-          // _id: new mongoose.Types.ObjectId(),
-          // uploader: req.body.uploader,
-          // uploader: "Ajay",
           filePath: req.file.path,
-          // fileName: req.file.originalname,
           fileName: req.file.filename,
-          // fileName: req.body.title + "-" + Date.now() + ".pdf",
           user: req.user._id,
           title: req.body.title,
           author: req.body.author,
           abstract: req.body.abstract,
+          mehtod: req.body.method,
           subject: req.body.subject,
           paper_parent: req.file.filename,
           paper_root_parent: req.file.filename,
@@ -481,6 +485,7 @@ router.post(
         author: req.body.author,
         abstract: req.body.abstract,
         subject: req.body.subject,
+        method: req.body.method,
 
         papernumber: version_num,
 

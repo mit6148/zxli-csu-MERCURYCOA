@@ -37,6 +37,8 @@ function makeUL(array) {
   return list;
 }
 function newPaperDOMObject() {
+  let likes = 0;
+
   //set up pdf link
 
   var url_string = window.location.href;
@@ -95,11 +97,11 @@ function newPaperDOMObject() {
   newStoryDiv.appendChild(newLikeButtonDiv);
 
   const newLikeSubmit = document.createElement("button");
-  newLikeSubmit.innerHTML = "&hearts; Like";
+  newLikeSubmit.innerHTML = `&hearts; Like ${likes}`;
   newLikeSubmit.className = "btn btn-outline-primary";
 
-  newLikeSubmit.addEventListener("click", () => {
-    // likes plus 1
+  newLikeSubmit.addEventListener("click", likes => {
+    return likes++;
   });
 
   newLikeButtonDiv.appendChild(newLikeSubmit);

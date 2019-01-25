@@ -7,6 +7,7 @@ const CommentPaperModelSchema = new mongoose.Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
   author: String,
   title: String,
+  likes: Number,
   views: Number,
   downloads: Number,
   paper_parent: { type: String, required: false },

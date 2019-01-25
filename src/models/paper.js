@@ -23,9 +23,9 @@ const PaperModelSchema = new mongoose.Schema({
   abstract: { type: String, required: false },
   keywords: { type: String, required: false },
   subject: { type: String, required: false },
-  // select list
-  // method: String,
+  method: { type: String, required: false },
   views: { type: Number, default: 0, required: false },
+  likes: Number,
   downloads: { type: Number, default: 0, required: false },
   papernumber: { type: String, required: false },
   filePath: { type: String, required: false },
