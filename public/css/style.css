@@ -116,3 +116,17 @@ div.circle-avatar {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+.align-top {
+  border: 1px solid red;
+
+  position: absolute;
+  top: 100%;
+  right: 0;
+  transform: translateY(-50%);
+}
+.float-left {
+  font-family: Ubuntu-Bold;
+  src: url("../fonts/ubuntu/Ubuntu-Bold.ttf");
+  font-weight: 300;
+  font-size: 40px;
+}

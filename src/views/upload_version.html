@@ -59,114 +59,117 @@
       integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="navbar-brand">Public Peer Review Platform</div>
+    <link rel="stylesheet" href="/static/css/style3.css" />
+    <!-- <link rel="stylesheet" href="/static/css/style.css" /> -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="navbar-nav" id="nav-item-container">
         <!-- navbar items are inserted here -->
       </div>
     </nav>
 
     <div class="container-contact100" id="profile-container">
-      <div class="wrap-contact100">
-        <form
+        <div class="wrap-contact100">
+      <div class="container">
+
+        <form role="form" data-toggle="validator"
           class="contact100-form validate-form"
           action="/api/uploadNewVersion"
           enctype="multipart/form-data"
           method="POST"
-          novalidate
         >
           <span class="contact100-form-title"> Submit A New Version ! </span>
 
+          <div class="form-group">
           <div
             class="wrap-input100 validate-input"
-            data-validate="Please enter paper title"
           >
-            <!-- <label for="name">Title:</label> -->
+           
             <input
               class="input100"
               type="text"
               id="title"
               name="title"
               placeholder="Title"
+              required
             />
-            <span class="focus-input100"></span>
           </div>
-
+          </div>
+          <div class="form-group">
           <div
             class="wrap-input100 validate-input"
             data-validate="Please enter authors"
           >
-            <!-- <label for="author">Author(s):</label> -->
             <input
               class="input100"
               type="text"
               id="author"
               name="author"
               placeholder="Author(s)"
+              required
             />
-            <span class="focus-input100"></span>
           </div>
-
+          </div>
+          <div class="form-group">
           <div
             class="wrap-input100 validate-input"
-            data-validate="Please enter keywords"
+            
           >
-            <!-- <label for="keywords">Keywords:</label> -->
+            
+        
             <input
               class="input100"
               type="text"
               id="keywords"
               name="keywords"
               placeholder="Keywords"
+              required
             />
-            <span class="focus-input100"></span>
           </div>
-          <div>
-            <!-- <label for="paper_parent">Parent_Paper:</label>
-            <input type="text" id="paper_parent" name="paper_parent" /> -->
+          </div>
 
-            <label for="paper_parent">New version for :</label>
+          <div>
             <input
               class="input100"
               type="text"
               id="paper_parent"
               name="paper_parent"
-              disabled
             />
           </div>
+
           <br />
+          <div class="form-group">
           <div
             class="wrap-input100 validate-input"
-            data-validate="Please enter abstract"
+            
           >
-            <!-- <label for="abs">Abstract:</label> -->
+            
             <textarea
               class="input100"
               id="abstract"
               name="abstract"
               placeholder="Abstract"
+              required
             ></textarea>
-            <span class="focus-input100"></span>
           </div>
-
+          </div>
+          <div class="form-group">
           <div
             class="wrap-input100 validate-input"
-            data-validate="Please enter method"
           >
-            <!-- <label for="method">Method:</label> -->
+            
             <textarea
               class="input100"
               id="method"
               name="method"
               placeholder="Method"
+              required
             ></textarea>
-            <span class="focus-input100"></span>
+          </div>
           </div>
 
           <div>
             <select class="input100" name="subject" id="subject">
-              <option>Subject</option>
+              <option value="other">Other</option>
               <option value="physics">Physics</option>
               <option value="chemistry">Chemistry</option>
               <option value="math">Math</option>
@@ -181,53 +184,56 @@
             </select>
           </div>
           <br />
-          <!-- <div class="container-contact100-form-btn">
-            <input type="file" name="photo" />
+          <div class="form-group">
+          <div class="container-contact100-form-btn">
+            <input type="file" name="photo" required/>
           </div>
+          </div>
+        
 
           <br />
-          <div class="container-contact100-form-btn">
-            <button
+          <div class="form-group">
+            <div class="container-contact100-form-btn">
+              <button
               class="contact100-form-btn"
               aria-hidden="true"
               type="submit"
-              value="Upload"
+              value="Upload"  
             >
               Submit
-            </button>
-          </div> -->
-          <div class="row">
-            <div class="col-6">
-              <div class="input-file-container">
-                <input
-                  class="input-file"
-                  id="my-file"
-                  type="file"
-                  name="photo"
-                />
-                <label tabindex="0" for="my-file" class="input-file-trigger"
-                  >SELECT A FILE</label
-                >
-              </div>
-              <p class="file-return"></p>
-            </div>
-
-            <div class="col-6">
-              <div class="container-contact100-form-btn">
-                <button
-                  class="contact100-form-btn"
-                  aria-hidden="true"
-                  type="submit"
-                  value="Upload"
-                >
-                  Submit
-                </button>
-              </div>
+              </button>
             </div>
           </div>
         </form>
+        </div>
       </div>
     </div>
+
+      <!-- Footer -->
+	<section id="footer">
+      <div class="container">
+        <div class="row text-center text-xs-center text-sm-left text-md-left">
+          <div class="col-xs-12 col-sm-4 col-md-4">
+            <h5>Quick links</h5>
+            <ul class="list-unstyled quick-links">
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Community</a></li>
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Submit Paper</a></li>
+            </ul>
+          </div>
+        
+        </div>
+       
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+            <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="/" target="_blank">PPRP</a></p>
+          </div>
+          </hr>
+        </div>	
+      </div>
+    </section>
+    <!-- ./Footer -->
 
     <div id="dropDownSelect1"></div>
 
@@ -252,50 +258,13 @@
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "UA-23581568-13");
+    >
     </script>
+    
   </body>
 
   <script src="/static/js/api.js"></script>
   <script src="/static/js/navbar.js"></script>
-  <script src="/static/js/upload.js"></script>
+  <script src="/static/js/uploadVersion.js"></script>
 
-  <!-- validation not working -->
-
-  <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-      "use strict";
-      window.addEventListener(
-        "load",
-        function() {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName("needs-validation");
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener(
-              "submit",
-              function(event) {
-                if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-                form.classList.add("was-validated");
-              },
-              false
-            );
-          });
-        },
-        false
-      );
-    })();
-  </script>
 </html>

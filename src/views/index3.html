@@ -55,8 +55,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="navbar-brand">Public Peer Review Platform</div>
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="navbar-nav" id="nav-item-container"></div>
     </nav>
 
@@ -78,9 +77,9 @@
       <!--/ Codrops top bar -->
 
       <header>
-        <h1><span>Public Peer Review Platform</span></h1>
+        <!-- <h1><span>Public Peer Review Platform</span></h1> -->
         <!-- <h1><span>Public </span> peer review Platform &amp; collaboration</h1> -->
-        <h2>Fun with skeuomorphism &amp; CSS3 rotations</h2>
+        <!-- <h2>Fun with skeuomorphism &amp; CSS3 rotations</h2> -->
 
         <nav class="codrops-demos">
           <!-- <a href="/newest_paper">Newest Papers</a> -->
@@ -107,6 +106,8 @@
           <span class="note-ie">Sorry, only modern browsers.</span>
         </div>
       </header>
+
+      
         <div class="col-12">
           <a name="all-papers"></a>
           <section class="main">
@@ -117,45 +118,46 @@
                 <h4><a href='#physics'> Physics</a></h4>
                 <!-- <h4><span>Physics</span></h4> -->
               </div>
+
               <div>
                 <span class="sb-icon icon-chemistry"></span>
-                <h4><span>Chemistry</span></h4>
+                <h4><a href='#chemistry'> Chemistry</a></h4>
               </div>
               <div>
                 <span class="sb-icon icon-math"></span>
-                <h4><span>Math</span></h4>
+                <h4><a href='#math'> Math</a></h4>
               </div>
               <div>
                 <span class="sb-icon icon-econ"></span>
-                <h4><span>Economics</span></h4>
+                <h4><a href='#econs'> Economics</a></h4>
               </div>
               <div>
                 <span class="sb-icon icon-globe"></span>
-                <h4><span>Biology</span></h4>
+                <h4><a href='#biology'>Biology</a></h4>
               </div>
               <div>
                 <span class="sb-icon icon-econ"></span>
-                <h4><span>EECS</span></h4>
+                <h4><a href='#eecs'>EECS</a></h4>
               </div>
               <div>
                 <span class="sb-icon icon-social"></span>
-                <h4><span>Social Science</span></h4>
+                <h4><a href='#social'> Social Science</a></h4>
               </div>
               <div>
                 <span class="sb-icon icon-globe"></span>
-                <h4><span>Astronomy</span></h4>
+                <h4><a href='#astronomy'>Astronomy</a></h4>
               </div>
               <div>
                 <span class="sb-icon icon-business"></span>
-                <h4><span>Business & Management</span></h4>
+                <h4><a href='#business'>Business & Management</a></h4>
               </div>
               <div>
                 <span class="sb-icon icon-globe"></span>
-                <h4><span>Energy & Earth Science</span></h4>
+                <h4><a href='#energy'>Energy & Earth Science</a></h4>
               </div>
               <div>
                 <span class="sb-icon icon-art"></span>
-                <h4><span>Art & Culture</span></h4>
+                <h4><a href='#art'>Art & Culture</a></h4>
               </div>
               <div>
                 <h4><span>Click to start</span></h4>
@@ -167,6 +169,7 @@
             <!-- sb-container -->
           </section>
         </div>
+        <hr />
         <div class="col-12">
           <section class="main">
             <a name="new-papers"></a> <br />
@@ -175,13 +178,16 @@
                 <a class="current-demo" href="#new-papers">Newest Papers</a>
                 <a class="current-demo" href="#pop-papers">Most Popular Papers</a>
             </nav>
-            <h4>Newest Papers</h4>
+<br />
+
+            <h4 style="text-align: center;">Newest Papers</h4>
             
             <div class="card-body" id="newest-papers">
               <!-- last post inserted here -->
             </div>
           </section>
         </div>
+        <hr />
 
         <!-- </div> -->
         <div class="col-12">
@@ -192,7 +198,9 @@
                     <a class="current-demo" href="#new-papers">Newest Papers</a>
                     <a class="current-demo" href="#pop-papers">Most Popular Papers</a>
                 </nav>
-            <h4>Most Popular Papers</h4>
+                <br />
+            
+            <h4 style="text-align: center;">Most Popular Papers</h4>
 
             <br />
             <!-- <div class="card"> -->
@@ -203,31 +211,93 @@
 
           <!-- </div> -->
         </div>
+        <hr />
 
-        <div class="col-4">
-                <h4>Subjects</h4>
+        <div class="col-12">
+                
+                <nav class="codrops-demos">
+                    <a class="current-demo" href="#all-papers">All Papers</a>
+                    <a class="current-demo" href="#new-papers">Newest Papers</a>
+                    <a class="current-demo" href="#pop-papers">Most Popular Papers</a>
+                </nav>
                 <br />
-                <div class="card">
-                  <a name='physics'>Physics</a>
+
+                <h4 style="text-align: center;">All Papers</h4>
+                  <a name='physics'><h5>Physics</h5></a>
                   <div class="card-body" id="physics-card">
-      
                   </div>
-                  <h5>Chemistry</h5>
+
+                  <a name='chemsitry'><h5>Chemistry</h5></a>
                   <div class="card-body" id="chemistry-card">
-      
                   </div>
-                  <h5>Mathematics</h5>
+
+
+                  <a name='math'><h5>Math</h5></a>
                   <div class="card-body" id="math-card">
-      
                   </div>
-                  <h5>Economics</h5>
-                  <div class="card-body" id="econ-card">
-      
+
+                  <a name='econs'><h5>Economics</h5></a>
+                  <div class="card-body" id="economics-card">
                   </div>
-                </div>
+
+
+                  <a name='biology'><h5>Biology</h5></a>
+                  <div class="card-body" id="biology-card">
+                  </div>
+
+                  <a name='eecs'><h5>EECS</h5></a>
+                  <div class="card-body" id="eecs-card">
+                  </div>
+
+                  <a name='social'><h5>Social Science</h5></a>
+                  <div class="card-body" id="social-card">
+                  </div>
+
+                  <a name='astronomy'><h5>Astronomy</h5></a>
+                  <div class="card-body" id="astronomy-card">
+                  </div>
+
+                  <a name='business'><h5>Business & Management</h5></a>
+                  <div class="card-body" id="business-card">
+                  </div>
+
+                  <a name='energy'><h5>Energy & Earth Science</h5></a>
+                  <div class="card-body" id="energy-card">
+                  </div>
+
+                  <a name='art'><h5>Art & Culture</h5></a>
+                  <div class="card-body" id="art-card">
+                  </div>
+                  <h5>Others</h5>
+                  <div class="card-body " id="other-card">
               </div>
       </div>
     </div>
+      <!-- Footer -->
+	<section id="footer">
+      <div class="container">
+        <div class="row text-center text-xs-center text-sm-left text-md-left">
+          <div class="col-xs-12 col-sm-4 col-md-4">
+            <h5>Quick links</h5>
+            <ul class="list-unstyled quick-links">
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Community</a></li>
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Submit Paper</a></li>
+            </ul>
+          </div>
+        
+        </div>
+       
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+            <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="/" target="_blank">PPRP</a></p>
+          </div>
+          </hr>
+        </div>	
+      </div>
+    </section>
+    <!-- ./Footer -->
     <script src="/static/js/api.js"></script>
     <script src="/static/js/navbar.js"></script>
     <script src="/static/js/home.js"></script>

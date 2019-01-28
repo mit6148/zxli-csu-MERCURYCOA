@@ -4,105 +4,232 @@
     <title>Paper Page</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  </head>
-  <body>
+
+    <link
+      href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+    <link
+      href="/static/bootstrap-star-rating/css/star-rating.css"
+      media="all"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
+    <link
+      href="/static/bootstrap-star-rating/themes/krajee-svg/theme.css"
+      media="all"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- important mandatory libraries -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+    <script
+      src="/static/bootstrap-star-rating/js/star-rating.js"
+      type="text/javascript"
+    ></script>
+
+    <script
+      src="/static/bootstrap-star-rating/js/star-rating.min.js"
+      type="text/javascript"
+    ></script>
+
+    <script
+      src="/static/bootstrap-star-rating/css/star-rating.min.css"
+      type="text/css"
+      rel="stylesheet"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
+    <script src="/static/bootstrap-star-rating/themes/krajee-svg/theme.js"></script>
+
+    <!-- optionally if you need translation for your language then include locale file as mentioned below -->
+    <!-- <script src="/static/bootstrap-star-rating/js/locales/<lang>.js"></script> -->
+
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
       integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="navbar-brand">Public Peer Review Platform</div>
-      <div class="navbar-nav" id="nav-item-container">
-        <!-- navbar items are inserted here -->
+    <link rel="stylesheet" href="/static/css/style3.css" />
+    <!-- <link rel="stylesheet" href="/static/css/style.css" /> -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+
+        <!-- <a class="navbar-brand" href="/"><h3>Public Peer Review Platform<h3></a> -->
+        <div class="navbar-nav" id="nav-item-container">
+          <!-- navbar items are inserted here -->
       </div>
+
     </nav>
+   
 
-    <div class="container text-center" id="paper-container">
-      <div class="large-paper-container text-center my-4"></div>
-      <hr />
-      <h4>Title</h4>
-      <a id="name-container"><!-- name inserted here --></a>
-      <div id="new-paper"><!-- name inserted here --></div>
-      <div>
-        <!-- <span class="glyphicon glyphicon-thumbs-up">
-          <a class="btn btn-info btn-lg" id="like-btn"> &hearts; Like </a>
-        </span> -->
-      </div>
-      <div id="paper-container"><!-- papers inserted here --></div>
-      <div class="row mt-4">
-        <div class="col-4">
-          <h4>Paper Number</h4>
-          <br />
 
-          <div class="card">
-            <div class="card-body" id="abstract-card">
-              Paper Number
-              <!-- last post inserted here -->
+    <div class="container-fluid" id="paper-container">
+      <!-- <div class="card"> -->
+          
+          <div>
+              <input id="input-id" type="text" class="rating float-right" data-size="sm" />
             </div>
+        <hr />
+        <div class="row-col">
+          <div class="card-body">
+            <a id="name-container"><!-- title inserted here --></a> <br />
+          </div>
+          <div id="new-comment"><!-- new comment button inserted here --></div>
+        </div>
+        <br />
+
+        <div class="row col-12">
+          <div class="card-body" id="author"><!-- author inserted here --></div>
+
+          <!-- <div class="card-body" id="views-card"> -->
+          <div class="col-1" id="views-card">
+            <span class="glyphicon glyphicon-eye-open"> </span>
           </div>
         </div>
-        <div class="col-4">
-          <h4>Comments</h4>
-          <br />
-          <div class="card">
-            <div class="card-body" id="comment-card">
-              Comments
-              <!-- last post inserted here -->
-            </div>
+        <div class="row col-12">
+          <div class="card-body" id="papernumber-card"></div>
+          <div class="col-1" id="downloads-card">
+            <div class="glyphicon glyphicon-download-alt"></div>
           </div>
         </div>
+        <div class="row col-12">
+          <div class="card-body" id="keyword-card">Keywords:</div>
+          <div class="card-body" id="subject-card"></div>
 
-        <div class="col-4">
-          <h4>History</h4>
-          <br />
-          <div class="card">
-            <div class="card-body" id="version-card">
-              <!-- last post inserted here -->
-            </div>
-          </div>
+          <!-- subject inserted here -->
         </div>
-        <div class="col-4">
+        
+
+        <div class="card-body" id="abstract-card">
           <h4>Abstract</h4>
-          <br />
-          <div class="card">
-            <div class="card-body" id="history-card">
-              Abstract
-              <!-- last post inserted here -->
-            </div>
-          </div>
-        </div>
-        <div class="col-4">
-          <h4>Views</h4>
-          <br />
-          <div class="card">
-            <div class="card-body" id="views-card">
-              <!-- <p>Downloads</p>
-              <p>Views</p> -->
-              <!-- last post inserted here -->
-            </div>
-          </div>
+          <!-- abstract inserted here -->
         </div>
 
-        <div class="col-4">
-          <h4>Downloads</h4>
-          <br />
-          <div class="card">
-            <div class="card-body" id="downloads-card">
-              <!-- <p>Downloads</p>
-                <p>Views</p> -->
-              <!-- last post inserted here -->
-            </div>
-          </div>
+
+        <br />
+        <hr />
+        <div class="card-body" id="method-card">
+          <h4>Methods</h4>
+          <!-- abstract inserted here -->
         </div>
+        <br />
+        
+
+        <!-- <div class="row mt-4"> -->
+            <div class="mx-auto bg-warning" style="width: 100%; height: 30px;">  
+                <h3>Comments</h3>              <div class="card-body" id="comment-card">
+                
+                <!-- comment list inserted here -->
+              </div>
+
+            </div>
+
+        <br />
+        <br />
+
+        <br />
+
+        <br />
+
+        <br />
+
+
+        <br />
+
+        <br />
+
+        <br />
+
+        
+
+        <div class="mx-auto bg-warning" style="width: 100%; height: 30px;">  
+            <h3>Versions</h3>              <div class="card-body" id="version-card">
+            
+            <!-- version list inserted here -->
+          </div>
+
+        </div>
+    </div><br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <br/>
+
+    <br/>
+
+    <br/>
+
+    <br/>
+
+
+    <br/>
+
+    <br/>
+
+    <br/>
+
+  
+
+    <!-- Footer -->
+	<section id="footer">
+      <div class="container">
+        <div class="row text-center text-xs-center text-sm-left text-md-left">
+          <div class="col-xs-12 col-sm-4 col-md-4">
+            <h5>Quick links</h5>
+            <ul class="list-unstyled quick-links">
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Community</a></li>
+              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Submit Paper</a></li>
+            </ul>
+          </div>
+        
+        </div>
+       
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+            <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="/" target="_blank">PPRP</a></p>
+          </div>
+          </hr>
+        </div>	
       </div>
-    </div>
+    </section>
+    <!-- ./Footer -->
   </body>
+
   <script src="/static/js/api.js"></script>
   <script src="/static/js/navbar.js"></script>
   <script src="/static/js/paper.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>

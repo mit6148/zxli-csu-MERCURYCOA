@@ -23,6 +23,37 @@ function main() {
     renderEconPaper(papers);
   });
 
+  get("/api/cate/biology", {}, function(papers) {
+    renderBioPaper(papers);
+  });
+
+  get("/api/cate/eecs", {}, function(papers) {
+    renderEECSPaper(papers);
+  });
+
+  get("/api/cate/social", {}, function(papers) {
+    renderSocialPaper(papers);
+  });
+
+  get("/api/cate/astronomy", {}, function(papers) {
+    renderAstronomyPaper(papers);
+  });
+
+  get("/api/cate/business", {}, function(papers) {
+    renderBusinessPaper(papers);
+  });
+
+  get("/api/cate/energy", {}, function(papers) {
+    renderEnergyPaper(papers);
+  });
+
+  get("/api/cate/art", {}, function(papers) {
+    renderArtPaper(papers);
+  });
+  get("/api/cate/other", {}, function(papers) {
+    renderOtherPaper(papers);
+  });
+
   get("/api/whoami", {}, function(user) {
     renderNavbar(user);
   });
@@ -83,6 +114,70 @@ function renderMathPaper(papers) {
 
 function renderEconPaper(papers) {
   const storiesDiv = document.getElementById("econ-card");
+  for (let i = 0; i < papers.length; i++) {
+    const currentStory = papers[i];
+    storiesDiv.prepend(paperDOMObject(currentStory));
+  }
+}
+
+function renderBioPaper(papers) {
+  const storiesDiv = document.getElementById("biology-card");
+  for (let i = 0; i < papers.length; i++) {
+    const currentStory = papers[i];
+    storiesDiv.prepend(paperDOMObject(currentStory));
+  }
+}
+
+function renderEECSPaper(papers) {
+  const storiesDiv = document.getElementById("eecs-card");
+  for (let i = 0; i < papers.length; i++) {
+    const currentStory = papers[i];
+    storiesDiv.prepend(paperDOMObject(currentStory));
+  }
+}
+
+function renderSocialPaper(papers) {
+  const storiesDiv = document.getElementById("social-card");
+  for (let i = 0; i < papers.length; i++) {
+    const currentStory = papers[i];
+    storiesDiv.prepend(paperDOMObject(currentStory));
+  }
+}
+
+function renderAstronomyPaper(papers) {
+  const storiesDiv = document.getElementById("astronomy-card");
+  for (let i = 0; i < papers.length; i++) {
+    const currentStory = papers[i];
+    storiesDiv.prepend(paperDOMObject(currentStory));
+  }
+}
+
+function renderBusinessPaper(papers) {
+  const storiesDiv = document.getElementById("business-card");
+  for (let i = 0; i < papers.length; i++) {
+    const currentStory = papers[i];
+    storiesDiv.prepend(paperDOMObject(currentStory));
+  }
+}
+
+function renderEnergyPaper(papers) {
+  const storiesDiv = document.getElementById("energy-card");
+  for (let i = 0; i < papers.length; i++) {
+    const currentStory = papers[i];
+    storiesDiv.prepend(paperDOMObject(currentStory));
+  }
+}
+
+function renderArtPaper(papers) {
+  const storiesDiv = document.getElementById("art-card");
+  for (let i = 0; i < papers.length; i++) {
+    const currentStory = papers[i];
+    storiesDiv.prepend(paperDOMObject(currentStory));
+  }
+}
+
+function renderOtherPaper(papers) {
+  const storiesDiv = document.getElementById("other-card");
   for (let i = 0; i < papers.length; i++) {
     const currentStory = papers[i];
     storiesDiv.prepend(paperDOMObject(currentStory));

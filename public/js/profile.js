@@ -1,5 +1,14 @@
 function main() {
   const profileId = window.location.search.substring(1);
+  get(
+    "/api/user",
+    {
+      user_id: profileId
+    },
+    function(user, err) {
+      renderUserData(user);
+    }
+  );
 
   get("/api/user_papers", { user_id: profileId }, function(papers, err) {
     renderPaper(papers);
@@ -13,23 +22,41 @@ function main() {
 }
 
 function paperDOMObject(paperJSON) {
-  commentDiv = document.createElement("div");
-  commentDiv.setAttribute("id", paperJSON._id);
-  commentDiv.className = "comment mb-2";
+  PaperDiv = document.createElement("div");
 
-  commentCreatorSpan = document.createElement("a");
-  commentCreatorSpan.className = "comment-creator";
-  commentCreatorSpan.innerHTML = paperJSON.title;
-  commentCreatorSpan.setAttribute("href", "/api/paper/" + paperJSON.fileName);
+  // PaperDiv.innerHTML = paperJSON.views;
+  // PaperDiv.setAttribute("id", paperJSON._id);
+  // PaperDiv.className = "comment mb-2";
+  // nameHeader = document.createElement("h1");
 
-  commentDiv.appendChild(commentCreatorSpan);
+  titleLink = document.createElement("a");
+  titleLink.setAttribute("href", "/api/paper/" + paperJSON.fileName);
+  titleSpan = document.createElement("h3");
+  titleSpan.innerHTML = paperJSON.title;
+  titleLink.appendChild(titleSpan);
+  PaperDiv.appendChild(titleLink);
 
-  return commentDiv;
+  viewSpan = document.createElement("span");
+  viewSpan.innerHTML = `      ${paperJSON.views} viewed  | `;
+  PaperDiv.appendChild(viewSpan);
+
+  downloadSpan = document.createElement("span");
+  downloadSpan.innerHTML = `${paperJSON.downloads} downloaded`;
+  PaperDiv.appendChild(downloadSpan);
+
+  versionBtn = document.createElement("button");
+  versionBtn.innerHTML = "Update Version";
+  versionBtn.className = "btn btn-light";
+  versionBtn.addEventListener("click", () => {
+    window.location = "/api/upload_version_form/" + paperJSON.fileName;
+  });
+  PaperDiv.appendChild(versionBtn);
+
+  return PaperDiv;
 }
 
 function renderPaper(papers, user) {
   const storiesDiv = document.getElementById("papers");
-  console.log(papers);
 
   for (let i = 0; i < papers.length; i++) {
     const currentStory = papers[i];
@@ -41,7 +68,6 @@ function renderPaper(papers, user) {
 
 function renderCommentPaper(papers, user) {
   const storiesDiv = document.getElementById("commentpapers");
-  console.log(papers);
 
   for (let i = 0; i < papers.length; i++) {
     const currentStory = papers[i];
@@ -61,25 +87,12 @@ function newPaperDOMObject() {
 
   const newStorySubmit = document.createElement("button");
   newStorySubmit.innerHTML = "Upload A New Paper";
-  newStorySubmit.className = "btn btn-outline-primary";
+  newStorySubmit.className = "btn btn-info";
   newStorySubmit.addEventListener("click", () => {
     window.location = "/api/upload_paper_form";
   });
 
   newStoryButtonDiv.appendChild(newStorySubmit);
-
-  const DownloadButton = document.createElement("div");
-  DownloadButton.className = "input-group-append";
-  newStoryDiv.appendChild(DownloadButton);
-
-  const btnSubmit = document.createElement("button");
-  btnSubmit.innerHTML = "Download";
-  btnSubmit.className = "btn btn-outline-primary";
-  btnSubmit.addEventListener("click", () => {
-    window.location = "/download";
-  });
-
-  DownloadButton.appendChild(btnSubmit);
 
   return newStoryDiv;
 }
@@ -87,38 +100,7 @@ function newPaperDOMObject() {
 function renderUserData(user) {
   // rendering name
   const nameContainer = document.getElementById("name-container");
-  const nameHeader = document.createElement("h1");
-  nameHeader.innerHTML = user.name;
+  const nameHeader = document.createElement("h4");
+  nameHeader.innerHTML = `Hi, ${user.name} !`;
   nameContainer.appendChild(nameHeader);
-
-  // rendering profile image
-  const profileImage = document.getElementById("profile-image");
-
-  // profileImage.style =
-  //   "background-image:url(https://i.pinimg.com/736x/98/e0/7d/98e07decc7c1ca58236995de3567e46a--cat-shirts-kitties-cutest.jpg)";
-
-  // rendering latest post
-  const latestPostCard = document.getElementById("latest-post-card");
-
-  const creatorSpan = document.createElement("a");
-  creatorSpan.className = "story-creator card-title";
-  creatorSpan.innerHTML = user.name;
-  creatorSpan.setAttribute("href", "/u/profile?" + user._id);
-  latestPostCard.appendChild(creatorSpan);
-
-  const latestPost = document.createElement("p");
-  latestPost.className = "story-content card-text";
-  latestPost.innerHTML = user.last_post;
-  latestPostCard.appendChild(latestPost);
-
-  // rendering description
-
-  const description = document.getElementById("description-card");
-
-  const desSpan = document.createElement("a");
-  desSpan.className = "description card-title";
-  desSpan.innerHTML = user.papers[0];
-  desSpan.setAttribute("href", "/paper");
-
-  description.appendChild(desSpan);
 }

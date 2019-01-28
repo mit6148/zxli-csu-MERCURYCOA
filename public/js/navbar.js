@@ -1,16 +1,19 @@
 function newNavbarItem(text, url) {
   const itemLink = document.createElement("a");
   itemLink.className = "nav-item nav-link";
-  itemLink.innerHTML = text;
   itemLink.href = url;
+  const itemFont = document.createElement("h3");
+  itemFont.innerHTML = text;
+  itemLink.appendChild(itemFont);
 
   return itemLink;
 }
 
 function renderNavbar(user) {
   const navbarDiv = document.getElementById("nav-item-container");
-
+  navbarDiv.appendChild(newNavbarItem("Public Peer Review Platform", "/"));
   navbarDiv.appendChild(newNavbarItem("Home", "/"));
+
   navbarDiv.appendChild(newNavbarItem("Community", "/feed"));
   navbarDiv.appendChild(
     newNavbarItem("Submit Paper", "/api/upload_paper_form")

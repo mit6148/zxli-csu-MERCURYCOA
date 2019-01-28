@@ -4,7 +4,7 @@ const router = express.Router();
 const path = require("path");
 // public endpoints
 router.get("/feed", function(req, res, next) {
-  // res.sendFile("index.html", { root: "src/views" });
+  // res.sendFile("community.html", { root: "src/views" });
   res.sendFile("pdf.html", { root: "src/views" });
 });
 
@@ -22,7 +22,8 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/u/profile", function(req, res) {
-  res.sendFile("profile.html", { root: "src/views" });
+  // res.sendFile("profile.html", { root: "src/views" });
+  res.sendFile("profile0.html", { root: "src/views" });
 });
 
 router.get("/paper/", function(req, res) {
