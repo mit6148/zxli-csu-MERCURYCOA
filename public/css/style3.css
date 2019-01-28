@@ -366,13 +366,13 @@ section .section-title {
   }
 }
 
-.navbar {
+/* .navbar {
   font-family: Ubuntu-Bold;
   color: #ffffff;
   background: #007b5e;
   font-size: 1em;
   text-align: right;
-}
+} */
 
 /* demo.css */
 @font-face {
@@ -479,8 +479,8 @@ a {
 /* Header Style */
 .codrops-top {
   line-height: 24px;
-  font-size: 11px;
-  background: #fff;
+  font-size: 15px;
+  background: rgb(102, 37, 37);
   background: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
   z-index: 9999;
@@ -590,4 +590,12 @@ a {
 .no-csstransforms3d .support-note span.no-csstransforms3d,
 .no-csstransitions .support-note span.no-csstransitions {
   display: block;
+}
+
+.navbar {
+  font-family: Ubuntu-Bold;
+  color: #ffffff;
+  background: #007b5e;
+  /* font-size: 1em; */
+  font-size: 200px;
 }
