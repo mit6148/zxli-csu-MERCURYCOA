@@ -58,7 +58,7 @@ function renderPaperData(paper) {
     var li = document.createElement("li");
     var anchor = document.createElement("a");
     anchor.className = "comment-creator card-title";
-    anchor.innerHTML = paper.comments[i].papernumber;
+    anchor.innerHTML = paper.comments[i];
 
     anchor.setAttribute("href", "/api/paper/" + paper.comments[i]);
     // anchor.setAttribute("href", "/api/viewpaper?fileName=" + paper.comments[i]);

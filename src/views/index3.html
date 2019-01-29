@@ -19,12 +19,17 @@
     <!-- <link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/style3.css" /> -->
 
-    <link rel="stylesheet" href="/static/css/style3.css" />
-    <link rel="stylesheet" href="/static/css/demo.css" />
+
+
     <link
-      href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic"
+      href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"
       rel="stylesheet"
-      type="text/css"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
     />
 
     <link
@@ -33,7 +38,13 @@
       integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/static/css/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
     <!-- <link rel="stylesheet" href="/static/css/style3.css" />
     <link rel="stylesheet" href="/static/css/demo.css" /> -->
 
@@ -55,11 +66,13 @@
   </head>
 
   <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
-        <div class="container">
-
-      <div class="navbar-nav" id="nav-item-container"></div>
-      </div>
+    <nav class="navbar navbar-expand-lg fix-top row">
+        <div class="navbar-nav col" id="nav-item-container-right">
+        </div>
+        <div class="col">
+        </div>
+        <div class="navbar-nav col" id="nav-item-container-left">
+        </div>
     </nav>
 
     <div class="container">
@@ -110,7 +123,7 @@
         </div>
       </header>
 
-      
+
         <div class="col-12">
           <a name="all-papers"></a>
           <section class="main">
@@ -184,7 +197,7 @@
 <br />
 
             <h4 style="text-align: center;">Newest Papers</h4>
-            
+
             <div class="card-body" id="newest-papers">
               <!-- last post inserted here -->
             </div>
@@ -202,7 +215,7 @@
                     <a class="current-demo" href="#pop-papers">Most Popular Papers</a>
                 </nav>
                 <br />
-            
+
             <h4 style="text-align: center;">Most Popular Papers</h4>
 
             <br />
@@ -217,7 +230,7 @@
         <hr />
 
         <div class="col-12">
-                
+
                 <nav class="codrops-demos">
                     <a class="current-demo" href="#all-papers">All Papers</a>
                     <a class="current-demo" href="#new-papers">Newest Papers</a>
@@ -289,15 +302,15 @@
               <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Submit Paper</a></li>
             </ul>
           </div>
-        
+
         </div>
-       
+
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
             <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="/" target="_blank">PPRP</a></p>
           </div>
           </hr>
-        </div>	
+        </div>
       </div>
     </section>
     <!-- ./Footer -->
@@ -329,6 +342,6 @@
         });
       });
     </script>
-    
+
   </body>
 </html>
