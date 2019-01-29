@@ -199,6 +199,16 @@ router.post("/comment", connect.ensureLoggedIn(), function(req, res) {
   res.send({ hi: "hi" });
 });
 
+router.post("/likes", function(req, res) {
+  Paper.findOneAndUpdate(
+    { fileName: req.body.fileName },
+    { $inc: { likes: 1 } },
+    function(err, paper) {
+      console.log(paper.likes);
+    }
+  );
+});
+
 // router.post(
 //   "/test",
 //   function() {
@@ -288,15 +298,9 @@ router.post(
     console.log("no problem");
     console.log("file data", req.file);
     if (req.file == undefined) {
-      // return res
-      //   .status(422)
-      //   .send({ error: "You must select a file to upload." });
       res.redirect("/api/upload_paper_form");
     }
-    //console.log(req.body.author)
     Paper.find({}, function(err, papers) {
-      console.log("hello");
-      // const num_papers = papers.length;
       Paper.find({}, function(err, paper) {
         let paper_num = 0;
 
@@ -305,10 +309,7 @@ router.post(
             paper_num++;
           }
         }
-        console.log(paper_num);
 
-        //console.log(err);
-        //console.log(paper.length);
         const product = new Paper({
           filePath: req.file.path,
           fileName: req.file.filename,
@@ -316,7 +317,7 @@ router.post(
           title: req.body.title,
           author: req.body.author,
           abstract: req.body.abstract,
-          mehtod: req.body.method,
+          method: req.body.method,
           keywords: req.body.keywords,
           subject: req.body.subject,
           paper_parent: req.file.filename,
@@ -331,11 +332,14 @@ router.post(
             console.log("save");
             Paper.find({}).exec(function(err, files) {
               if (files) {
-                // res.status(201).json({
-                //   message: "File uploaded successfully",
-                //   allFilesDetail: files
-                // });
                 res.redirect("/api/upload_paper_form");
+                Paper.findOneAndUpdate(
+                  { fileName: product.fileName },
+                  { $push: { versions: product.fileName } },
+                  { new: true }
+                ).then(function(paper) {
+                  console.log(product.fileName);
+                });
               } else {
                 res.status(204).json({
                   message: "No file detail exist",
@@ -372,18 +376,12 @@ router.post(
       err,
       parentPaper
     ) {
-      console.log(parentPaper);
-      console.log("parentPaper");
-
       let prev_comment_num = parentPaper.comments.length;
       let comment_num = parentPaper.papernumber.split("-");
       comment_num[0] = "C";
       comment_num[3] = parseInt(prev_comment_num);
       comment_num = comment_num.join("-");
       console.log(comment_num);
-
-      // p - 002 - V2
-      // c - 002 - V2 - x
 
       const newComment = new CommentPaper({
         filePath: req.file.path,
@@ -394,12 +392,8 @@ router.post(
         title: req.body.title,
         author: req.body.author,
         paper_parent: req.body.paper_parent,
-        // paper_parent_fileName: req.query.fileName,
 
         papernumber: comment_num
-        // papernumber: {
-        //   type: paper ? `P-${num_papers + 1}` : `C-${num_papers + 1}`
-        // }
       });
       newComment
         .save()
@@ -475,19 +469,12 @@ router.post(
           console.log("save");
           Paper.find({}).exec(function(err, files) {
             if (files) {
-              // res.status(201).json({
-              //   message: "File uploaded successfully",
-              //   allFilesDetail: files
-              // });
               res.redirect("/api/upload_version_form/" + req.body.paper_parent);
               Paper.findOneAndUpdate(
                 { fileName: parentPaper.paper_root_parent },
                 { $push: { versions: newPaper.fileName } },
                 { new: true }
-              ).then(function(paper) {
-                console.log(paper);
-                console.log("happyy");
-              });
+              ).then(function(paper) {});
             } else {
               res.status(204).json({
                 message: "No file detail exist",

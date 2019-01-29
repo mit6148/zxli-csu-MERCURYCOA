@@ -151,10 +151,48 @@ function renderPaperData(paper) {
 
   titleElement.innerHTML = paper.title;
   titleElement.setAttribute("href", "/api/viewpaper?fileName=" + fileName);
+  //
+  // download button
+  // const DownloadButton = document.createElement("div");
+  // DownloadButton.className = "input-group-append";
+  // newStoryDiv.appendChild(DownloadButton);
+
+  // // download submit
+  // const btnSubmit = document.createElement("a");
+  // btnSubmit.innerHTML = "Download";
+  // btnSubmit.className = "btn btn-outline-primary";
+  // btnSubmit.setAttribute("href", "/api/downloadpaper?fileName=" + fileName);
+  //
+
+  const likeDiv = document.getElementById("likebtn");
+
+  const likeButton = document.createElement("button");
+  likeButton.innerHTML = "Like";
+  likeButton.className = " btn btn-info";
+  likeButton.addEventListener("click", submitLikeHandler);
+
+  likeDiv.appendChild(likeButton);
+
+  function submitLikeHandler() {
+    var url_string = window.location.href;
+    var fileName = url_string.substring(
+      url_string.lastIndexOf("/") + 1,
+      url_string.length
+    );
+    const data = {
+      fileName: fileName
+    };
+
+    post("/api/likes/", data);
+  }
+
+  //catbook - feed.js - submitCommentHandler
+  // // add download submit to button
+  // DownloadButton.appendChild(btnSubmit);
 
   const author = document.getElementById("author");
-  // author.className = "float-right";
-  author.innerHTML = ` auhtors: ${paper.author}`;
+  author.className = "paper-author";
+  author.innerHTML = `Authors: ${paper.author}`;
 
   // document.getElementById("new-comment").appendChild(newButtonDOMObject());
 

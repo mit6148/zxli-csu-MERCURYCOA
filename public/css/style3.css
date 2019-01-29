@@ -439,7 +439,7 @@ a {
 }
 .main {
   width: 1000px;
-  height: 700px;
+  /* height: 700px; */
   /* height: 500px; */
   overflow: hidden;
   margin: 0 auto;
@@ -591,11 +591,13 @@ a {
 .no-csstransitions .support-note span.no-csstransitions {
   display: block;
 }
-
 .navbar {
+  all: unset;
   font-family: Ubuntu-Bold;
   color: #ffffff;
   background: #007b5e;
   /* font-size: 1em; */
   font-size: 200px;
+  position: fixed;
+  z-index: 10000;
 }
