@@ -6,14 +6,15 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
     <link rel="icon" type="image/png" href="/static/images/icons/favicon.ico" />
-   
+
     <link
       rel="stylesheet"
       type="text/css"
       href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
     />
-    
+
     <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/form.css" />
   </head>
   <body>
     <link
@@ -22,221 +23,145 @@
       integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
       crossorigin="anonymous"
     />
-   
-    <nav class="navbar navbar-expand-lg navbar-dark">
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="navbar-nav" id="nav-item-container">
-        <!-- navbar items are inserted here -->
+      </div>
+    </nav> -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">ResearchRev.org</a>
+        <div class="navbar-nav col" id="nav-item-container-right"></div>
+        <div class="col"></div>
+        <div class="navbar-nav col" id="nav-item-container-left"></div>
       </div>
     </nav>
 
     <div class="container-contact100" id="profile-container">
-        <div class="wrap-contact100">
-            <div class="container">
+      <!-- <div class="mx-auto"> -->
+      <div class="wrap-contact100">
+        <!-- <div class="card-body"> -->
 
-
-        <form role="form" data-toggle="validator"
+        <form
+          role="form"
+          data-toggle="validator"
           class="contact100-form validate-form"
           action="/api/uploadPaper"
           enctype="multipart/form-data"
-          method="POST" >
+          method="POST"
+        >
           <span class="contact100-form-title"> Submit A Paper ! </span>
 
           <div class="form-group">
-          <div
-            class="wrap-input100 validate-input"
-          >
-            <input
-              class="input100"
-              type="text"
-              id="title"
-              name="title"
-              placeholder="Title"
-              required
-            />
+            <div class="wrap-input100 validate-input">
+              <input
+                class="input100"
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Title"
+                required
+              />
+            </div>
           </div>
-          </div>
-        
+
           <div class="form-group">
-          <div
-            class="wrap-input100 validate-input"
-          >
-            <input
-              class="input100"
-              type="text"
-              id="author"
-              name="author"
-              placeholder="Author(s)"
-              required
-            />
+            <div class="wrap-input100 validate-input">
+              <input
+                class="input100"
+                type="text"
+                id="author"
+                name="author"
+                placeholder="Author(s)"
+                required
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <div
-            class="wrap-input100 validate-input">
-            <input
-              class="input100"
-              type="text"
-              id="keywords"
-              name="keywords"
-              placeholder="Keywords"
-              required
-            />
+          <div class="form-group">
+            <div class="wrap-input100 validate-input">
+              <input
+                class="input100"
+                type="text"
+                id="keywords"
+                name="keywords"
+                placeholder="Keywords"
+                required
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <div
-            class="wrap-input100 validate-input"
-          >
-            <textarea
-              class="input100"
-              id="abstract"
-              name="abstract"
-              placeholder="Abstract"
-              required
-            ></textarea>
+          <div class="form-group">
+            <div class="wrap-input100 validate-input">
+              <textarea
+                class="input100"
+                id="abstract"
+                name="abstract"
+                placeholder="Abstract"
+                required
+              ></textarea>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div
-            class="wrap-input100 validate-input"
-          >
-           
-            <textarea
-              class="input100"
-              id="method"
-              name="method"
-              placeholder="Method"
-              required
-            ></textarea>
+          <div class="form-group">
+            <div class="wrap-input100 validate-input">
+              <textarea
+                class="input100"
+                id="method"
+                name="method"
+                placeholder="Method"
+                required
+              ></textarea>
             </div>
           </div>
 
           <br />
           <div class="form-group">
-          <div>
-            <select class="input100" name="subject" id="subject">
-              <option value="other">Other</option>
-              <option value="physics">Physics</option>
-              <option value="chemistry">Chemistry</option>
-              <option value="math">Math</option>
-              <option value="econ">Economics</option>
-              <option value="biology">Biology</option>
-              <option value="eecs">EECS</option>
-              <option value="social">Social Science</option>
-              <option value="astronomy">Astronomy</option>
-              <option value="business">Business & Management</option>
-              <option value="earth">Energy & Earth Science</option>
-              <option value="art">Art & Culture</option>
-            </select>
-          </div>
-          </div>
-
-          <br />
-          <div class="container-contact100-form-btn">
-          <div class="form-group">
-          
-            <input type="file" name="photo" required/>
-          </div>
+            <div>
+              <select class="input100" name="subject" id="subject">
+                <option value="other">Other</option>
+                <option value="physics">Physics</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="math">Math</option>
+                <option value="econ">Economics</option>
+                <option value="biology">Biology</option>
+                <option value="eecs">EECS</option>
+                <option value="social">Social Science</option>
+                <option value="astronomy">Astronomy</option>
+                <option value="business">Business & Management</option>
+                <option value="earth">Energy & Earth Science</option>
+                <option value="art">Art & Culture</option>
+              </select>
+            </div>
           </div>
 
           <br />
           <div class="container-contact100-form-btn">
-          <div class="form-group"> 
-            <button
-              class="contact100-form-btn"
-              aria-hidden="true"
-              type="submit"
-              value="Upload"
-              required
-            >
-              Submit
-            </button>
+            <div class="form-group">
+              <input type="file" name="photo" required />
+            </div>
           </div>
-        </div>
 
+          <br />
+          <div class="container-contact100-form-btn">
+            <div class="form-group">
+              <button
+                class="contact100-form-btn"
+                aria-hidden="true"
+                type="submit"
+                value="Upload"
+                required
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </div>
-  </div>
-    
-      <!-- Footer -->
-	<section id="footer">
-      <div class="container">
-        <div class="row text-center text-xs-center text-sm-left text-md-left">
-          <div class="col-xs-12 col-sm-4 col-md-4">
-            <h5>Quick links</h5>
-            <ul class="list-unstyled quick-links">
-              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
-              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
-              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Community</a></li>
-              <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Submit Paper</a></li>
-            </ul>
-          </div>
-        
-        </div>
-       
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-            <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="/" target="_blank">PPRP</a></p>
-          </div>
-          </hr>
-        </div>	
-      </div>
-    </section>
-    <!-- ./Footer -->
-    
-    <script src="/static/js/form.js"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "UA-23581568-13");
-    </script>
+    <!-- </div> -->
   </body>
 
   <script src="/static/js/api.js"></script>
   <script src="/static/js/navbar.js"></script>
   <script src="/static/js/uploadpaper.js"></script>
-
-  <!-- validation not working -->
-
-  <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-      "use strict";
-      window.addEventListener(
-        "load",
-        function() {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName("needs-validation");
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener(
-              "submit",
-              function(event) {
-                if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-                form.classList.add("was-validated");
-              },
-              false
-            );
-          });
-        },
-        false
-      );
-    })();
-  </script>
 </html>

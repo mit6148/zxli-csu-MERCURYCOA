@@ -101,6 +101,6 @@ function renderUserData(user) {
   // rendering name
   const nameContainer = document.getElementById("name-container");
   const nameHeader = document.createElement("h4");
-  nameHeader.innerHTML = `Hi, ${user.name} !`;
+  nameHeader.innerHTML = `Dashboard`;
   nameContainer.appendChild(nameHeader);
 }

@@ -37,17 +37,17 @@
       href="/static/vendor/animsition/css/animsition.min.css"
     />
     <!--===============================================================================================-->
-    <link
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       href="/static/vendor/select2/select2.min.css"
-    />
+    /> -->
     <!--===============================================================================================-->
-    <link
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       href="/static/vendor/daterangepicker/daterangepicker.css"
-    />
+    /> -->
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/static/css/util.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/form.css" />
@@ -59,13 +59,22 @@
       integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/static/css/style3.css" />
+    <!-- <link rel="stylesheet" href="/static/css/style3.css" /> -->
     <!-- <link rel="stylesheet" href="/static/css/style.css" /> -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="navbar-nav" id="nav-item-container">
-        <!-- navbar items are inserted here -->
       </div>
-    </nav>
+    </nav> -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">ResearchRev.org</a>
+          <div class="navbar-nav col" id="nav-item-container-right"></div>
+          <div class="col"></div>
+          <div class="navbar-nav col" id="nav-item-container-left"></div>
+        </div>
+      </nav>
+
 
     <div class="container-contact100" id="profile-container">
       <div class="wrap-contact100">
@@ -119,12 +128,82 @@
             />
           </div>
 
-          <br />
           <div class="form-group">
-          <div class="container-contact100-form-btn">
-            <input type="file" name="photo" required/>
-          </div>
-          </div>
+              <div
+                class="wrap-input100 validate-input"
+                
+              >
+                
+            
+                <input
+                  class="input100"
+                  type="text"
+                  id="keywords"
+                  name="keywords"
+                  placeholder="Keywords"
+                  required
+                />
+              </div>
+              </div>
+    
+             
+    
+              <br />
+              <div class="form-group">
+              <div
+                class="wrap-input100 validate-input"
+                
+              >
+                
+                <textarea
+                  class="input100"
+                  id="abstract"
+                  name="abstract"
+                  placeholder="Abstract"
+                  required
+                ></textarea>
+              </div>
+              </div>
+              <div class="form-group">
+              <div
+                class="wrap-input100 validate-input"
+              >
+                
+                <textarea
+                  class="input100"
+                  id="method"
+                  name="method"
+                  placeholder="Method"
+                  required
+                ></textarea>
+              </div>
+              </div>
+    
+              <div>
+                <select class="input100" name="subject" id="subject">
+                  <option value="other">Other</option>
+                  <option value="physics">Physics</option>
+                  <option value="chemistry">Chemistry</option>
+                  <option value="math">Math</option>
+                  <option value="econ">Economics</option>
+                  <option value="biology">Biology</option>
+                  <option value="eecs">EECS</option>
+                  <option value="social">Social Science</option>
+                  <option value="astronomy">Astronomy</option>
+                  <option value="business">Business & Management</option>
+                  <option value="earth">Energy & Earth Science</option>
+                  <option value="art">Art & Culture</option>
+                </select>
+              </div>
+              <br />
+              <div class="form-group">
+              <div class="container-contact100-form-btn">
+                <input type="file" name="photo" required/>
+              </div>
+              </div>
+
+          <br />
+       
 
           <br />
           <div class="form-group">

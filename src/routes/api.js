@@ -120,14 +120,11 @@ router.get("/user_papers", function(req, res) {
 });
 
 router.get("/user_comments", function(req, res) {
-  console.log(req.query.user_id);
   CommentPaper.find({ user: new ObjectId(req.query.user_id) }, function(
     err,
     papers
   ) {
-    console.log(papers);
-    console.log("hhhh");
-    console.log(err);
+    console.log("i want papers");
     res.send(papers);
   });
 });
@@ -335,16 +332,17 @@ router.post(
                 res.redirect("/api/upload_paper_form");
                 Paper.findOneAndUpdate(
                   { fileName: product.fileName },
-                  { $push: { versions: product.fileName } },
+                  { $push: { versions: product } },
                   { new: true }
                 ).then(function(paper) {
                   console.log(product.fileName);
                 });
               } else {
-                res.status(204).json({
-                  message: "No file detail exist",
-                  allFilesDetail: files
-                });
+                // res.status(204).json({
+                //   message: "No file detail exist",
+                //   allFilesDetail: files
+                // });
+                res.redirect("/api/upload_paper_form");
               }
             });
           })

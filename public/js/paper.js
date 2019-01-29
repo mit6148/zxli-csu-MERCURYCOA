@@ -71,11 +71,11 @@ function renderPaperData(paper) {
 
   var ul = document.createElement("ul");
 
-  for (var i = paper.versions.length; i > 0; i--) {
+  for (var i = paper.versions.length - 1; i >= 0; i--) {
     var li = document.createElement("li");
     var anchor = document.createElement("a");
     anchor.className = "version card-title";
-    anchor.innerHTML = `version${i} : ` + paper.versions[i];
+    anchor.innerHTML = `version${i} : ` + paper.versions[i].title;
 
     // anchor.setAttribute("href", "/api/viewpaper?fileName=" + paper.versions[i]);
     anchor.setAttribute("href", "/api/paper/" + paper.versions[i]);

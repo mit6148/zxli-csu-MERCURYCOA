@@ -57,40 +57,71 @@
     <!-- <nav class="navbar navbar-expand-lg navbar-dark fix-top row"> -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">ResearchRev.org</a>
-        <div class="navbar-nav col" id="nav-item-container-right"></div>
-        <div class="col"></div>
-        <div class="navbar-nav col" id="nav-item-container-left"></div>
+        <a class="navbar-brand" href="/">ResearchRev.org</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="navbar-nav col" id="nav-item-container-right"></div>
+          <div class="col"></div>
+          <div class="navbar-nav col" id="nav-item-container-left"></div>
+        </div>
       </div>
     </nav>
 
     <!-- Page Content -->
     <div class="container">
+      <!-- <img class="card-img-top" src="/static/images/bg.jpg" alt="" /> -->
+      <style>
+        .JumboHeaderImg {
+          background-image: url("/static/images/bg1.gif");
+          background-size: cover;
+        }
+      </style>
       <!-- Jumbotron Header -->
-      <header class="jumbotron my-4">
-        <h3 class="display-3">Welcome to Public Peer Review Platform</h3>
-        <p class="lead">
-          A platform creating a truly open peer review system for the
-          researcher, by the researcher. This is a project initiated by a group
-          doctoral students who believe research experience could be better. In
-          facing the limitations of current peer review system, we propose an
-          alternative preprint system allowing the related community members to
-          review research articles and establish collaboration.
-        </p>
-        <a href="#" class="btn btn-primary btn-lg">Submit you first paper</a>
-      </header>
+      <div class="jumbotron my-4 JumboHeaderImg">
+        <!-- <header class="jumbotron my-4 JumboHeaderImg"> -->
+        <h3 class="display-4 text-white">
+          Welcome to Public Peer Review Platform
+        </h3>
+        <!-- <p class="lead"> -->
+        <div class="col-10">
+          <p class="display-6 text-white">
+            A platform creating a truly open peer review system for the
+            researcher, by the researcher. This is a project initiated by a
+            group doctoral students who believe research experience could be
+            better. In facing the limitations of current peer review system, we
+            propose an alternative preprint system allowing the related
+            community members to review research articles and establish
+            collaboration.
+          </p>
+        </div>
+        <br />
+        <a href="/api/upload_paper_form" class="btn btn-light btn-lg"
+          >Submit your first paper</a
+        >
+        <!-- </header> -->
+      </div>
 
       <!-- Page Features -->
       <div class="row text-center">
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card">
-            <img class="card-img-top" src="/static/images/physics.jpg" alt="" />
+            <img class="card-img-top" src="/static/images/phy.png" alt="" />
             <div class="card-body">
               <h4 class="card-title">Physics</h4>
               <p class="card-text"></p>
             </div>
             <div class="card-footer">
-              <a href="#physics" class="btn btn-primary">Find Out More!</a>
+              <a href="#physics" class="btn btn-info">Find Out More!</a>
             </div>
           </div>
         </div>
@@ -99,7 +130,7 @@
           <div class="card">
             <img
               class="card-img-top"
-              src="/static/images/chemistry.jpg"
+              src="/static/images/chem.png"
               alt=""
             />
             <div class="card-body">
@@ -107,7 +138,7 @@
               <p class="card-text"></p>
             </div>
             <div class="card-footer">
-              <a href="#chem" class="btn btn-primary">Find Out More!</a>
+              <a href="#chem" class="btn btn-info">Find Out More!</a>
             </div>
           </div>
         </div>
@@ -116,7 +147,7 @@
           <div class="card">
             <img
               class="card-img-top"
-              src="/static/images/economics.jpg"
+              src="/static/images/eco.png"
               alt=""
             />
             <div class="card-body">
@@ -124,20 +155,20 @@
               <p class="card-text"></p>
             </div>
             <div class="card-footer">
-              <a href="#econs" class="btn btn-primary">Find Out More!</a>
+              <a href="#econs" class="btn btn-info">Find Out More!</a>
             </div>
           </div>
         </div>
 
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card">
-            <img class="card-img-top" src="/static/images/bio.jpg" alt="" />
+            <img class="card-img-top" src="/static/images/bio.png" alt="" />
             <div class="card-body">
               <h4 class="card-title">Biology</h4>
               <p class="card-text"></p>
             </div>
             <div class="card-footer">
-              <a href="#biology" class="btn btn-primary">Find Out More!</a>
+              <a href="#biology" class="btn btn-info">Find Out More!</a>
             </div>
           </div>
         </div>
@@ -160,6 +191,9 @@
 
               <a name="biology"><h5>Biology</h5></a>
               <div class="card-body" id="biology-card"></div>
+
+              <a name="other"><h5>Other</h5></a>
+              <div class="card-body" id="other-card"></div>
             </div>
           </div>
           <!-- /.row -->
