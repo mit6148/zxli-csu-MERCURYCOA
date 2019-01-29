@@ -88,7 +88,7 @@ function renderPaperData(paper) {
 
   const version_num = document.getElementById("papernumber-card");
   const versionSpan = document.createElement("a");
-  versionSpan.className = "story-creator card-title";
+  // versionSpan.className = "story-creator card-title";
 
   const d = new Date(paper.date);
   versionSpan.innerHTML = `${
@@ -98,17 +98,17 @@ function renderPaperData(paper) {
 
   version_num.appendChild(versionSpan);
 
-  const tag = document.getElementById("subject-card");
-  const tagSpan = document.createElement("span");
-  tagSpan.className = "badge badge-secondry float-right";
-  tagSpan.innerHTML = paper.subject;
-  tag.appendChild(tagSpan);
+  // const tag = document.getElementById("subject-card");
+  // const tagSpan = document.createElement("span");
+  // tagSpan.className = "badge badge-secondry float-right";
+  // tagSpan.innerHTML = paper.subject;
+  // tag.appendChild(tagSpan);
 
-  const keywords = document.getElementById("keyword-card");
-  const kwSpan = document.createElement("span");
-  kwSpan.className = "badge badge-secondry";
-  kwSpan.innerHTML = paper.keywords;
-  keywords.appendChild(kwSpan);
+  // const keywords = document.getElementById("keyword-card");
+  // const kwSpan = document.createElement("span");
+  // kwSpan.className = "badge badge-secondry";
+  // kwSpan.innerHTML = paper.keywords;
+  // keywords.appendChild(kwSpan);
 
   //
   const historyCard = document.getElementById("abstract-card");
@@ -131,7 +131,7 @@ function renderPaperData(paper) {
   const viewsCard = document.getElementById("views-card");
 
   const viewsSpan = document.createElement("span");
-  viewsSpan.className = "float-right views";
+  // viewsSpan.className = "float-right views";
 
   viewsSpan.innerHTML = paper.views;
 
@@ -140,14 +140,14 @@ function renderPaperData(paper) {
   const downloadCard = document.getElementById("downloads-card");
 
   const downloadSpan = document.createElement("span");
-  downloadSpan.className = "float-right downloads";
+  // downloadSpan.className = "float-right downloads";
 
   downloadSpan.innerHTML = paper.downloads;
 
   downloadCard.appendChild(downloadSpan);
 
   const titleElement = document.getElementById("name-container");
-  titleElement.className = "float-left";
+  // titleElement.className = "float-left";
 
   titleElement.innerHTML = paper.title;
   titleElement.setAttribute("href", "/api/viewpaper?fileName=" + fileName);
