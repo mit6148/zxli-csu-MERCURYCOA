@@ -10,19 +10,20 @@ function newNavbarItem(text, url) {
 }
 
 function renderNavbar(user) {
-  const navbarDiv = document.getElementById("nav-item-container");
-  navbarDiv.appendChild(newNavbarItem("Public Peer Review Platform", "/"));
-  navbarDiv.appendChild(newNavbarItem("Home", "/"));
+  const navbarDivright = document.getElementById("nav-item-container-right");
+  navbarDivright.appendChild(newNavbarItem("Public Peer Review Platform", "/"));
+  const navbarDivLeft = document.getElementById("nav-item-container-left");
+  navbarDivLeft.appendChild(newNavbarItem("Home", "/"));
 
-  navbarDiv.appendChild(newNavbarItem("Community", "/feed"));
-  navbarDiv.appendChild(
+  navbarDivLeft.appendChild(newNavbarItem("Community", "/feed"));
+  navbarDivLeft.appendChild(
     newNavbarItem("Submit Paper", "/api/upload_paper_form")
   );
 
   if (user._id !== undefined) {
-    navbarDiv.appendChild(newNavbarItem("Dashboard", "/u/profile?" + user._id));
-    navbarDiv.appendChild(newNavbarItem("Logout", "/logout"));
+    navbarDivLeft.appendChild(newNavbarItem("Dashboard", "/u/profile?" + user._id));
+    navbarDivLeft.appendChild(newNavbarItem("Logout", "/logout"));
   } else {
-    navbarDiv.appendChild(newNavbarItem("Login", "/auth/google"));
+    navbarDivLeft.appendChild(newNavbarItem("Login", "/auth/google"));
   }
 }
