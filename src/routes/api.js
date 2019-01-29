@@ -405,7 +405,7 @@ router.post(
 
               Paper.findOneAndUpdate(
                 { fileName: req.body.paper_parent },
-                { $push: { comments: newComment.fileName } },
+                { $push: { comments: newComment } },
                 { new: true }
               ).then(function(paper) {});
             } else {

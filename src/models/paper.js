@@ -7,13 +7,13 @@ const PaperModelSchema = new mongoose.Schema({
   comments: [
     {
       // type: Schema.Types.ObjectId,
-      type: String,
+      type: Object,
       ref: "CommentPaper"
     }
   ],
   versions: [
     {
-      type: String,
+      type: Object,
       ref: "Paper"
     }
   ],

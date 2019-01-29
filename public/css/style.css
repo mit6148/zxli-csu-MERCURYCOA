@@ -130,3 +130,8 @@ div.circle-avatar {
   font-weight: 300;
   font-size: 40px;
 }
+
+.row-col {
+  width: 60%;
+  text-align: left;
+}
