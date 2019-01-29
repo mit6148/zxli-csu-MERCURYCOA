@@ -11,17 +11,19 @@ function newNavbarItem(text, url) {
 
 function renderNavbar(user) {
   const navbarDivright = document.getElementById("nav-item-container-right");
-  navbarDivright.appendChild(newNavbarItem("Public Peer Review Platform", "/"));
+  // navbarDivright.appendChild(newNavbarItem("Public Peer Review Platform", "/"));
   const navbarDivLeft = document.getElementById("nav-item-container-left");
   navbarDivLeft.appendChild(newNavbarItem("Home", "/"));
 
-  navbarDivLeft.appendChild(newNavbarItem("Community", "/feed"));
+  // navbarDivLeft.appendChild(newNavbarItem("Community", "/feed"));
   navbarDivLeft.appendChild(
-    newNavbarItem("Submit Paper", "/api/upload_paper_form")
+    newNavbarItem("Submission", "/api/upload_paper_form")
   );
 
   if (user._id !== undefined) {
-    navbarDivLeft.appendChild(newNavbarItem("Dashboard", "/u/profile?" + user._id));
+    navbarDivLeft.appendChild(
+      newNavbarItem("Dashboard", "/u/profile?" + user._id)
+    );
     navbarDivLeft.appendChild(newNavbarItem("Logout", "/logout"));
   } else {
     navbarDivLeft.appendChild(newNavbarItem("Login", "/auth/google"));
