@@ -200,15 +200,15 @@ router.post("/comment", connect.ensureLoggedIn(), function(req, res) {
   res.send({ hi: "hi" });
 });
 
-router.post("/likes", function(req, res) {
-  Paper.findOneAndUpdate(
-    { fileName: req.body.fileName },
-    { $inc: { likes: 1 } },
-    function(err, paper) {
-      console.log(paper.likes);
-    }
-  );
-});
+// router.post("/likes", function(req, res) {
+//   Paper.findOneAndUpdate(
+//     { fileName: req.body.fileName },
+//     { $inc: { likes: 1 } },
+//     function(err, paper) {
+//       console.log(paper.likes);
+//     }
+//   );
+// });
 
 // router.post(
 //   "/test",
@@ -267,16 +267,16 @@ router.get("/viewpaper", function(req, res) {
   res.redirect("/static/pdf/" + req.query.fileName);
 });
 
-// router.post("/likes/:fileName", function(req, res) {
-//   Paper.findOneAndUpdate(
-//     { fileName: req.query.fileName },
-//     { $inc: { likes: 1 } },
-//     function() {
-//       console.log("likes update");
-//     }
-//   );
-//   res.redirect("/static/pdf/" + req.query.fileName);
-// });
+router.post("/likes/:fileName", function(req, res) {
+  Paper.findOneAndUpdate(
+    { fileName: req.query.fileName },
+    { $inc: { likes: 1 } },
+    function() {
+      console.log("likes update");
+    }
+  );
+  res.redirect("/static/pdf/" + req.query.fileName);
+});
 
 router.get("/downloadpaper", function(req, res) {
   // res.sendFile("upload.html", { root: "src/views" });
