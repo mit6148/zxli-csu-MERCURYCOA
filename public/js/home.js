@@ -15,10 +15,6 @@ function main() {
     renderChemistryPaper(papers);
   });
 
-  get("/api/cate/math", {}, function(papers) {
-    renderMathPaper(papers);
-  });
-
   get("/api/cate/econ", {}, function(papers) {
     renderEconPaper(papers);
   });
@@ -27,29 +23,6 @@ function main() {
     renderBioPaper(papers);
   });
 
-  get("/api/cate/eecs", {}, function(papers) {
-    renderEECSPaper(papers);
-  });
-
-  get("/api/cate/social", {}, function(papers) {
-    renderSocialPaper(papers);
-  });
-
-  get("/api/cate/astronomy", {}, function(papers) {
-    renderAstronomyPaper(papers);
-  });
-
-  get("/api/cate/business", {}, function(papers) {
-    renderBusinessPaper(papers);
-  });
-
-  get("/api/cate/energy", {}, function(papers) {
-    renderEnergyPaper(papers);
-  });
-
-  get("/api/cate/art", {}, function(papers) {
-    renderArtPaper(papers);
-  });
   get("/api/cate/other", {}, function(papers) {
     renderOtherPaper(papers);
   });

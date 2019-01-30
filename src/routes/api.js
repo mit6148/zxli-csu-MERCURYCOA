@@ -76,6 +76,10 @@ router.get("/onepaper", function(req, res) {
   });
 });
 
+router.get("/success", function(req, res) {
+  res.sendFile("success.html", { root: "src/views" });
+});
+
 router.get("/stories", function(req, res) {
   Story.find({}, function(err, stories) {
     res.send(stories);
@@ -329,7 +333,6 @@ router.post(
             console.log("save");
             Paper.find({}).exec(function(err, files) {
               if (files) {
-                res.redirect("/api/upload_paper_form");
                 Paper.findOneAndUpdate(
                   { fileName: product.fileName },
                   { $push: { versions: product } },
@@ -337,6 +340,8 @@ router.post(
                 ).then(function(paper) {
                   console.log(product.fileName);
                 });
+                // res.redirect("/api/upload_paper_form");
+                res.redirect("/api/success");
               } else {
                 // res.status(204).json({
                 //   message: "No file detail exist",
@@ -384,13 +389,15 @@ router.post(
       const newComment = new CommentPaper({
         filePath: req.file.path,
         fileName: req.file.filename,
-        commentPaperName: req.file.originalname,
-
         user: req.user._id,
         title: req.body.title,
         author: req.body.author,
         paper_parent: req.body.paper_parent,
-
+        abstract: req.body.abstract,
+        subject: req.body.subject,
+        method: req.body.method,
+        keywords: req.body.keywords,
+        paper_parent: req.body.paper_parent,
         papernumber: comment_num
       });
       newComment

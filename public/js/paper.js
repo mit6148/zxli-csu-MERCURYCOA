@@ -58,9 +58,13 @@ function renderPaperData(paper) {
     var li = document.createElement("li");
     var anchor = document.createElement("a");
     anchor.className = "comment-creator card-title";
-    anchor.innerHTML = paper.comments[i];
+    const d = new Date(paper.comments[i].date);
 
-    anchor.setAttribute("href", "/api/paper/" + paper.comments[i]);
+    anchor.innerHTML = ` [ ${paper.comments[i].papernumber} ] |  ${
+      paper.comments[i].title
+    } | submitted at ${d.toLocaleDateString()}`;
+
+    anchor.setAttribute("href", "/api/paper/" + paper.comments[i].fileName);
     // anchor.setAttribute("href", "/api/viewpaper?fileName=" + paper.comments[i]);
     li.appendChild(anchor);
     ul.appendChild(li);
@@ -75,10 +79,13 @@ function renderPaperData(paper) {
     var li = document.createElement("li");
     var anchor = document.createElement("a");
     anchor.className = "version card-title";
-    anchor.innerHTML = `version${i} : ` + paper.versions[i].title;
+    const d = new Date(paper.versions[i].date);
+    anchor.innerHTML = `version ${i} : [${paper.versions[i].papernumber}] | ${
+      paper.versions[i].title
+    }  | submitted at ${d.toLocaleDateString()}`;
 
     // anchor.setAttribute("href", "/api/viewpaper?fileName=" + paper.versions[i]);
-    anchor.setAttribute("href", "/api/paper/" + paper.versions[i]);
+    anchor.setAttribute("href", "/api/paper/" + paper.versions[i].fileName);
     li.appendChild(anchor);
     ul.appendChild(li);
   }
@@ -87,8 +94,8 @@ function renderPaperData(paper) {
   // rendering abstract
 
   const version_num = document.getElementById("papernumber-card");
+  version_num.className = "paper-number";
   const versionSpan = document.createElement("a");
-  // versionSpan.className = "story-creator card-title";
 
   const d = new Date(paper.date);
   versionSpan.innerHTML = `${
@@ -98,11 +105,11 @@ function renderPaperData(paper) {
 
   version_num.appendChild(versionSpan);
 
-  // const tag = document.getElementById("subject-card");
-  // const tagSpan = document.createElement("span");
-  // tagSpan.className = "badge badge-secondry float-right";
-  // tagSpan.innerHTML = paper.subject;
-  // tag.appendChild(tagSpan);
+  const tag = document.getElementById("subject-card");
+  const tagSpan = document.createElement("span");
+  tagSpan.className = "badge badge-light float-right";
+  tagSpan.innerHTML = paper.subject;
+  tag.appendChild(tagSpan);
 
   // const keywords = document.getElementById("keyword-card");
   // const kwSpan = document.createElement("span");
@@ -114,8 +121,7 @@ function renderPaperData(paper) {
   const historyCard = document.getElementById("abstract-card");
 
   const historySpan = document.createElement("div");
-  historySpan.className = "story-creator card-title";
-  console.log(paper);
+  // historySpan.className = "story-creator card-title";
   historySpan.innerHTML = paper.abstract;
 
   historyCard.appendChild(historySpan);
@@ -123,7 +129,6 @@ function renderPaperData(paper) {
   const methodCard = document.getElementById("method-card");
 
   const methodSpan = document.createElement("div");
-  methodSpan.className = "story-creator card-title";
   methodSpan.innerHTML = paper.method;
 
   methodCard.appendChild(methodSpan);
@@ -153,22 +158,22 @@ function renderPaperData(paper) {
   titleElement.setAttribute("href", "/api/viewpaper?fileName=" + fileName);
   //
   // download button
-  // const DownloadButton = document.createElement("div");
-  // DownloadButton.className = "input-group-append";
-  // newStoryDiv.appendChild(DownloadButton);
+  const DownloadDiv = document.getElementById("download-btn");
 
   // // download submit
+  const btnSubmit = document.createElement("button");
   // const btnSubmit = document.createElement("a");
-  // btnSubmit.innerHTML = "Download";
-  // btnSubmit.className = "btn btn-outline-primary";
-  // btnSubmit.setAttribute("href", "/api/downloadpaper?fileName=" + fileName);
+  btnSubmit.innerHTML = "Download pdf";
+  btnSubmit.className = "btn btn-info btn-sm";
+  btnSubmit.setAttribute("href", "/api/downloadpaper?fileName=" + fileName);
+  DownloadDiv.appendChild(btnSubmit);
   //
 
   const likeDiv = document.getElementById("likebtn");
 
   const likeButton = document.createElement("button");
-  likeButton.innerHTML = "Like";
-  likeButton.className = " btn btn-info";
+  likeButton.innerHTML = "Recommend";
+  likeButton.className = " btn btn-info btn-sm";
   likeButton.addEventListener("click", submitLikeHandler);
 
   likeDiv.appendChild(likeButton);
@@ -192,17 +197,16 @@ function renderPaperData(paper) {
 
   const author = document.getElementById("author");
   author.className = "paper-author";
-  author.innerHTML = `Authors: ${paper.author}`;
+  author.innerHTML = paper.author;
 
   // document.getElementById("new-comment").appendChild(newButtonDOMObject());
 
   const commentButton = document.getElementById("new-comment");
-  commentButton.className = "col-12 col-md-offset-10";
   // commentButton.className = "input-group my-3";
 
   const newComSubmit = document.createElement("button");
-  newComSubmit.innerHTML = "Submit Comment";
-  newComSubmit.className = "btn btn-info";
+  newComSubmit.innerHTML = "Comment this paper";
+  newComSubmit.className = "btn btn-info btn-lg";
   // newComSubmit.className = "btn btn-outline-primary";
   newComSubmit.addEventListener("click", () => {
     window.location = "/api/upload_comment_form/" + fileName;

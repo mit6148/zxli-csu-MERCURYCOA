@@ -5,6 +5,8 @@ body {
   font-family: Ubuntu-Bold;
   src: url("../fonts/ubuntu/Ubuntu-Bold.ttf");
   font-weight: 300;
+  margin-right: 6%;
+  margin-left: 6%;
 }
 
 .story {
@@ -132,6 +134,17 @@ div.circle-avatar {
 }
 
 .row-col {
-  width: 60%;
+  width: 70%;
   text-align: left;
+}
+
+.paper-author {
+  font-size: 20px;
+}
+.paper-number {
+  font-size: 20px;
+}
+
+.glyphicon {
+  font-size: 50px;
 }

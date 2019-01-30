@@ -4,6 +4,19 @@ const Schema = mongoose.Schema;
 
 // define a schema
 const CommentPaperModelSchema = new mongoose.Schema({
+  comments: [
+    {
+      // type: Schema.Types.ObjectId,
+      type: Object,
+      ref: "CommentPaper"
+    }
+  ],
+  versions: [
+    {
+      type: Object,
+      ref: "CommentPaper"
+    }
+  ],
   user: { type: Schema.Types.ObjectId, ref: "User" },
   author: String,
   title: String,
@@ -18,8 +31,6 @@ const CommentPaperModelSchema = new mongoose.Schema({
   papernumber: { type: String, required: false },
   filePath: { type: String, required: false },
   fileName: { type: String, required: false },
-  // file name for version
-  // fileVerName: { type: String, required: false }
   date: {
     type: Date,
     default: Date.now
