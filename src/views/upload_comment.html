@@ -7,48 +7,7 @@
 
     <link rel="icon" type="image/png" href="/static/images/icons/favicon.ico" />
     <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/static/vendor/bootstrap/css/bootstrap.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/static/vendor/animate/animate.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/static/vendor/css-hamburgers/hamburgers.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/static/vendor/animsition/css/animsition.min.css"
-    />
-    <!--===============================================================================================-->
-    <!-- <link
-      rel="stylesheet"
-      type="text/css"
-      href="/static/vendor/select2/select2.min.css"
-    /> -->
-    <!--===============================================================================================-->
-    <!-- <link
-      rel="stylesheet"
-      type="text/css"
-      href="/static/vendor/daterangepicker/daterangepicker.css"
-    /> -->
-    <!--===============================================================================================-->
+    
     <link rel="stylesheet" type="text/css" href="/static/css/util.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/form.css" />
   </head>
@@ -59,20 +18,40 @@
       integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
       crossorigin="anonymous"
     />
-    <!-- <link rel="stylesheet" href="/static/css/style3.css" /> -->
-    <!-- <link rel="stylesheet" href="/static/css/style.css" /> -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="navbar-nav" id="nav-item-container">
-      </div>
-    </nav> -->
+   
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
               <img src="/static/images/logo-modified.png" width="25%" />
             </a>          <div class="navbar-nav col" id="nav-item-container-right"></div>
           <div class="col"></div>
           <div class="navbar-nav col" id="nav-item-container-left"></div>
+        </div>
+      </nav> -->
+
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="/">
+            <img src="/static/images/logo-modified.png" width="25%" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="navbar-nav col" id="nav-item-container-right"></div>
+            <div class="col"></div>
+            <div class="navbar-nav col" id="nav-item-container-left"></div>
+          </div>
         </div>
       </nav>
 
@@ -119,7 +98,6 @@
             />
            </div>
           </div>
-          <br />
           <div>
             <input
               class="input100"
@@ -128,6 +106,8 @@
               name="paper_parent"
             />
           </div>
+          <br/>
+
 
           <div class="form-group">
               <div
@@ -149,7 +129,6 @@
     
              
     
-              <br />
               <div class="form-group">
               <div
                 class="wrap-input100 validate-input"
@@ -242,39 +221,7 @@
     </section>
     <!-- ./Footer -->
 
-    <div id="dropDownSelect1"></div>
-
-    <!--===============================================================================================-->
-    <script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="/static/vendor/animsition/js/animsition.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="/static/vendor/bootstrap/js/popper.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="/static/vendor/select2/select2.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="/static/vendor/daterangepicker/moment.min.js"></script>
-    <script src="/static/vendor/daterangepicker/daterangepicker.js"></script>
-    <!--===============================================================================================-->
-    <script src="/static/vendor/countdowntime/countdowntime.js"></script>
-    <!--===============================================================================================-->
-    <script src="/static/js/form.js"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "UA-23581568-13");
-    </script>
+    
   </body>
 
   <script src="/static/js/api.js"></script>
