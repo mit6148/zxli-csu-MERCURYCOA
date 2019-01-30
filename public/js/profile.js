@@ -31,7 +31,10 @@ function paperDOMObject(paperJSON) {
 
   titleLink = document.createElement("a");
   titleLink.setAttribute("href", "/api/paper/" + paperJSON.fileName);
+  // const lastVersion = new Object(paperJSON.versions.pop());
+  // titleLink.setAttribute("href", "/api/paper/" + lastVersion.fileName);
   titleSpan = document.createElement("h3");
+  // titleSpan.innerHTML = lastVersion.title;
   titleSpan.innerHTML = paperJSON.title;
   titleLink.appendChild(titleSpan);
   PaperDiv.appendChild(titleLink);

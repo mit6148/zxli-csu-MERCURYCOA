@@ -161,7 +161,7 @@ function renderPaperData(paper) {
   const DownloadDiv = document.getElementById("download-btn");
 
   // // download submit
-  const btnSubmit = document.createElement("button");
+  const btnSubmit = document.createElement("a");
   // const btnSubmit = document.createElement("a");
   btnSubmit.innerHTML = "Download pdf";
   btnSubmit.className = "btn btn-info btn-sm";

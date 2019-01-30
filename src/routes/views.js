@@ -4,8 +4,8 @@ const router = express.Router();
 const path = require("path");
 // public endpoints
 router.get("/feed", function(req, res, next) {
-  // res.sendFile("community.html", { root: "src/views" });
-  res.sendFile("pdf.html", { root: "src/views" });
+  res.sendFile("community.html", { root: "src/views" });
+  // res.sendFile("pdf.html", { root: "src/views" });
 });
 
 router.get("/newest_paper", function(req, res, next) {

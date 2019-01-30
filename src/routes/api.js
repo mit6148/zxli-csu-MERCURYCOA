@@ -341,7 +341,9 @@ router.post(
                   console.log(product.fileName);
                 });
                 // res.redirect("/api/upload_paper_form");
-                res.redirect("/api/success");
+                //
+                res.redirect("/u/profile?" + product.user);
+                // res.redirect("/api/success");
               } else {
                 // res.status(204).json({
                 //   message: "No file detail exist",
@@ -406,7 +408,8 @@ router.post(
           console.log("save");
           CommentPaper.find({}).exec(function(err, files) {
             if (files) {
-              res.redirect("/api/upload_comment_form/" + req.body.paper_parent);
+              // res.redirect("/api/upload_comment_form/" + req.body.paper_parent);
+              res.redirect("/api/paper/" + newComment.paper_parent);
 
               Paper.findOneAndUpdate(
                 { fileName: req.body.paper_parent },
@@ -474,7 +477,9 @@ router.post(
           console.log("save");
           Paper.find({}).exec(function(err, files) {
             if (files) {
-              res.redirect("/api/upload_version_form/" + req.body.paper_parent);
+              // res.redirect("/api/upload_version_form/" + req.body.paper_parent);
+              res.redirect("/u/profile?" + newPaper.user);
+
               Paper.findOneAndUpdate(
                 { fileName: parentPaper.paper_root_parent },
                 { $push: { versions: newPaper.fileName } },
