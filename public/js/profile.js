@@ -24,17 +24,10 @@ function main() {
 function paperDOMObject(paperJSON) {
   PaperDiv = document.createElement("div");
 
-  // PaperDiv.innerHTML = paperJSON.views;
-  // PaperDiv.setAttribute("id", paperJSON._id);
-  // PaperDiv.className = "comment mb-2";
-  // nameHeader = document.createElement("h1");
-
   titleLink = document.createElement("a");
   titleLink.setAttribute("href", "/api/paper/" + paperJSON.fileName);
-  // const lastVersion = new Object(paperJSON.versions.pop());
-  // titleLink.setAttribute("href", "/api/paper/" + lastVersion.fileName);
+
   titleSpan = document.createElement("h3");
-  // titleSpan.innerHTML = lastVersion.title;
   titleSpan.innerHTML = paperJSON.title;
   titleLink.appendChild(titleSpan);
   PaperDiv.appendChild(titleLink);
@@ -58,6 +51,36 @@ function paperDOMObject(paperJSON) {
   return PaperDiv;
 }
 
+function commentDOMObject(paperJSON) {
+  PaperDiv = document.createElement("div");
+
+  titleLink = document.createElement("a");
+  titleLink.setAttribute("href", "/api/paper/" + paperJSON.fileName);
+
+  titleSpan = document.createElement("h3");
+  titleSpan.innerHTML = paperJSON.title;
+  titleLink.appendChild(titleSpan);
+  PaperDiv.appendChild(titleLink);
+
+  viewSpan = document.createElement("span");
+  viewSpan.innerHTML = `      ${paperJSON.views} viewed  | `;
+  PaperDiv.appendChild(viewSpan);
+
+  downloadSpan = document.createElement("span");
+  downloadSpan.innerHTML = `${paperJSON.downloads} downloaded`;
+  PaperDiv.appendChild(downloadSpan);
+
+  versionBtn = document.createElement("button");
+  versionBtn.innerHTML = "More Comment";
+  versionBtn.className = "btn btn-light";
+  versionBtn.addEventListener("click", () => {
+    window.location = "/api/upload_comment_form/" + paperJSON.fileName;
+  });
+  PaperDiv.appendChild(versionBtn);
+
+  return PaperDiv;
+}
+
 function renderPaper(papers, user) {
   const storiesDiv = document.getElementById("papers");
 
@@ -74,7 +97,7 @@ function renderCommentPaper(papers, user) {
 
   for (let i = 0; i < papers.length; i++) {
     const currentStory = papers[i];
-    storiesDiv.prepend(paperDOMObject(currentStory));
+    storiesDiv.prepend(commentDOMObject(currentStory));
   }
 }
 

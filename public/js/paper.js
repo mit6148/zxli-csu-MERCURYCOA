@@ -163,7 +163,7 @@ function renderPaperData(paper) {
   // // download submit
   const btnSubmit = document.createElement("a");
   // const btnSubmit = document.createElement("a");
-  btnSubmit.innerHTML = "Download pdf";
+  btnSubmit.innerHTML = "Download";
   btnSubmit.className = "btn btn-info btn-sm";
   btnSubmit.setAttribute("href", "/api/downloadpaper?fileName=" + fileName);
   DownloadDiv.appendChild(btnSubmit);
@@ -190,6 +190,15 @@ function renderPaperData(paper) {
 
     post("/api/likes/", data);
   }
+
+  const likeCard = document.getElementById("likes-card");
+
+  const likeSpan = document.createElement("span");
+  // downloadSpan.className = "float-right downloads";
+
+  likeSpan.innerHTML = paper.likes;
+
+  likeCard.appendChild(likeSpan);
 
   //catbook - feed.js - submitCommentHandler
   // // add download submit to button

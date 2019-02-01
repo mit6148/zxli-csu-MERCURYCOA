@@ -261,9 +261,17 @@ router.get("/viewpaper", function(req, res) {
     { fileName: req.query.fileName },
     { $inc: { views: 1 } },
     function() {
-      console.log("view update");
+      console.log("paper view update");
     }
   );
+  CommentPaper.findOneAndUpdate(
+    { fileName: req.query.fileName },
+    { $inc: { views: 1 } },
+    function() {
+      console.log("comment view update");
+    }
+  );
+
   res.redirect("/static/pdf/" + req.query.fileName);
 });
 
@@ -284,7 +292,14 @@ router.get("/downloadpaper", function(req, res) {
     { fileName: req.query.fileName },
     { $inc: { downloads: 1 } },
     function(paper) {
-      console.log("download update");
+      console.log("paper download update");
+    }
+  );
+  CommentPaper.findOneAndUpdate(
+    { fileName: req.query.fileName },
+    { $inc: { downloads: 1 } },
+    function(paper) {
+      console.log("comment download update");
     }
   );
   res.download("./public/pdf/" + req.query.fileName);
@@ -369,9 +384,6 @@ router.post(
   connect.ensureLoggedIn(),
   upload.single("photo"),
   function(req, res, next) {
-    console.log("no problem");
-    console.log("file data", req.file);
-    console.log(req.body);
     if (req.file == undefined) {
       return res
         .status(422)
@@ -381,10 +393,11 @@ router.post(
       err,
       parentPaper
     ) {
+      console.log(parentPaper);
       let prev_comment_num = parentPaper.comments.length;
       let comment_num = parentPaper.papernumber.split("-");
       comment_num[0] = "C";
-      comment_num[3] = parseInt(prev_comment_num);
+      comment_num[3] = parseInt(prev_comment_num) + 1;
       comment_num = comment_num.join("-");
       console.log(comment_num);
 
@@ -482,7 +495,7 @@ router.post(
 
               Paper.findOneAndUpdate(
                 { fileName: parentPaper.paper_root_parent },
-                { $push: { versions: newPaper.fileName } },
+                { $push: { versions: newPaper } },
                 { new: true }
               ).then(function(paper) {});
             } else {
