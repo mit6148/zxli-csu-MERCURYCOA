@@ -316,66 +316,66 @@ router.post(
     if (req.file == undefined) {
       res.redirect("/api/upload_paper_form");
     }
-    Paper.find({}, function(err, papers) {
-      Paper.find({}, function(err, paper) {
-        let paper_num = 0;
+    // Paper.find({}, function(err, papers) {
+    Paper.find({}, function(err, paper) {
+      let paper_num = 0;
 
-        for (p of paper) {
-          if (p.paper_root_parent == p.fileName) {
-            paper_num++;
-          }
+      for (p of paper) {
+        if (p.paper_root_parent == p.fileName) {
+          paper_num++;
         }
+      }
 
-        const product = new Paper({
-          filePath: req.file.path,
-          fileName: req.file.filename,
-          user: req.user._id,
-          title: req.body.title,
-          author: req.body.author,
-          abstract: req.body.abstract,
-          method: req.body.method,
-          keywords: req.body.keywords,
-          subject: req.body.subject,
-          paper_parent: req.file.filename,
-          paper_root_parent: req.file.filename,
-          paperName: req.file.originalname,
+      const product = new Paper({
+        filePath: req.file.path,
+        fileName: req.file.filename,
+        user: req.user._id,
+        title: req.body.title,
+        author: req.body.author,
+        abstract: req.body.abstract,
+        method: req.body.method,
+        keywords: req.body.keywords,
+        subject: req.body.subject,
+        paper_parent: req.file.filename,
+        paper_root_parent: req.file.filename,
+        paperName: req.file.originalname,
 
-          papernumber: `P - ${paper_num + 1} - V1`
-        });
-        product
-          .save()
-          .then(result => {
-            console.log("save");
-            Paper.find({}).exec(function(err, files) {
-              if (files) {
-                Paper.findOneAndUpdate(
-                  { fileName: product.fileName },
-                  { $push: { versions: product } },
-                  { new: true }
-                ).then(function(paper) {
-                  console.log(product.fileName);
-                });
-                // res.redirect("/api/upload_paper_form");
-                //
-                res.redirect("/u/profile?" + product.user);
-                // res.redirect("/api/success");
-              } else {
-                // res.status(204).json({
-                //   message: "No file detail exist",
-                //   allFilesDetail: files
-                // });
-                res.redirect("/api/upload_paper_form");
-              }
-            });
-          })
-          .catch(err => {
-            console.log(err);
-            res.status(500).json({
-              error: err
-            });
-          });
+        papernumber: `P - ${paper_num + 1} - V1`
       });
+      product
+        .save()
+        .then(result => {
+          console.log("save");
+          Paper.find({}).exec(function(err, files) {
+            if (files) {
+              Paper.findOneAndUpdate(
+                { fileName: product.fileName },
+                { $push: { versions: product } },
+                { new: true }
+              ).then(function(paper) {
+                console.log(product.fileName);
+              });
+              // res.redirect("/api/upload_paper_form");
+              //
+              res.redirect("/u/profile?" + product.user);
+              // res.redirect("/api/success");
+            } else {
+              // res.status(204).json({
+              //   message: "No file detail exist",
+              //   allFilesDetail: files
+              // });
+              res.redirect("/api/upload_paper_form");
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({
+            error: err
+          });
+        });
     });
+    // });
   }
 );
 
